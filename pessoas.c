@@ -9,7 +9,7 @@
 #define PSHEAD
 #endif
 
-#define PESSOAS 5
+#define PESSOAS 1
 
 pthread_t pessoas[PESSOAS];
 
@@ -17,6 +17,7 @@ void* cliente(void *arg){
   pessoa* ps = ((pessoa *) arg);
   int id = ps->id;
   inicia_pessoa(ps);
+
   free(ps);
   pthread_exit(0);
 }
@@ -25,7 +26,7 @@ void criar_pessoa(int id){
   ps->id = id;
   pthread_create(&pessoas[id],NULL,cliente,(void *) (ps));
 }
-void destruir_pessoa(int id){
+void embora_pessoa(int id){
   pthread_join(pessoas[id],NULL);
 }
 int main(){
@@ -35,8 +36,10 @@ int main(){
   for( i= 0; i<PESSOAS;i++){
     criar_pessoa(i);
   }
+
+  imprime_shop();
   for(i=0;i<PESSOAS;i++){
-    destruir_pessoa(i);
+    embora_pessoa(i);
   }  
 }
 

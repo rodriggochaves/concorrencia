@@ -71,13 +71,9 @@ void inicia_pessoa(pessoa* ps){
   
   int linha = inicio_pessoa[0];
   int coluna = inicio_pessoa[1];
-  int teste;
-  
+
   pthread_mutex_lock(&mlock[linha][coluna]); // Pega lock da celula
-  
   shop[linha][coluna] = 'P';
-  
-  printf("%d\n",teste );  
   
   ps->coluna = linha;
   ps->linha = coluna;
