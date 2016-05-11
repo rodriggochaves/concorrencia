@@ -17,7 +17,6 @@ void* cliente(void *arg){
   pessoa* ps = ((pessoa *) arg);
   int id = ps->id;
   inicia_pessoa(ps);
-
   free(ps);
   pthread_exit(0);
 }

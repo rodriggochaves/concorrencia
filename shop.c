@@ -9,6 +9,11 @@
 #define PSHEAD
 #endif
 
+#ifndef SHOPHEAD
+#define SHOPHEAD
+#include "shop.h"
+#endif
+
 #define LINHAS 17
 #define COLUNAS 57
 
@@ -67,7 +72,7 @@ int valido(int linha, int coluna){
 }
 
 // Pega lock inicial
-void inicia_pessoa(pessoa* ps){
+void inicia_pessoa(celula* cel){
   
   int linha = inicio_pessoa[0];
   int coluna = inicio_pessoa[1];
@@ -75,8 +80,13 @@ void inicia_pessoa(pessoa* ps){
   pthread_mutex_lock(&mlock[linha][coluna]); // Pega lock da celula
   shop[linha][coluna] = 'P';
   
-  ps->coluna = linha;
-  ps->linha = coluna;
+  cel->coluna = linha;
+  cel->linha = coluna;
+}
+
+// Move caractere da celula ini para celula prox
+void mover(int* ini[],int* prox[] ){
+  printf("opa\n");
 }
 
 // pega proximo lock

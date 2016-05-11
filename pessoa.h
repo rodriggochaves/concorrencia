@@ -1,5 +1,10 @@
+#ifndef SHOPHEAD
+#define SHOPHEAD
+#include "shop.h"
+#endif
+
 struct{
   int id;
-  int linha,coluna;
+  celula* cel;
   float  dinheiro;
 } typedef pessoa;
