@@ -9,7 +9,7 @@
 #define PSHEAD
 #endif
 
-#define PESSOAS 1
+#define PESSOAS 5
 
 pthread_t pessoas[PESSOAS];
 
@@ -26,7 +26,7 @@ void criar_pessoa(int id){
   ps->id = id;
   pthread_create(&pessoas[id],NULL,cliente,(void *) (ps));
 }
-void embora_pessoa(int id){
+void destruir_pessoa(int id){
   pthread_join(pessoas[id],NULL);
 }
 int main(){
@@ -39,7 +39,7 @@ int main(){
 
   imprime_shop();
   for(i=0;i<PESSOAS;i++){
-    embora_pessoa(i);
+    destruir_pessoa(i);
   }  
 }
 
