@@ -4,15 +4,14 @@
 #include <unistd.h>
 #include <semaphore.h>
 
+#ifndef PSHEAD
+#include "pessoa.h"
+#define PSHEAD
+#endif
+
 #define PESSOAS 1
 
 pthread_t pessoas[PESSOAS];
-
-struct{
-  int id;
-  int linha,coluna;
-  float  dinheiro;
-} typedef pessoa;
 
 void* cliente(void *arg){
   pessoa* ps = ((pessoa *) arg);

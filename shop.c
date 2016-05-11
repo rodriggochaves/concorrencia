@@ -4,6 +4,11 @@
 #include <stdlib.h>
 #include <pthread.h>
 
+#ifndef PSHEAD
+#include "pessoa.h"
+#define PSHEAD
+#endif
+
 #define LINHAS 17
 #define COLUNAS 57
 
@@ -13,12 +18,6 @@ int saida_pessoa[2];
 int inicio_carro[2];
 
 pthread_mutex_t mlock[LINHAS][COLUNAS];
-
-struct{
-  int id;
-  int linha,coluna;
-  float  dinheiro;
-} typedef pessoa;
 
 //Extrai mapa do arquivo e carrega dados em memória
 void cria_shop(){
