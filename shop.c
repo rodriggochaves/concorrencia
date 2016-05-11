@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -7,11 +8,12 @@
 
 char shop[LINHAS][COLUNAS];
 int inicio_pessoa[2];
+int saida_pessoa[2];
 int inicio_carro[2];
 
 pthread_mutex_t inips=PTHREAD_MUTEX_INITIALIZER, mlock[LINHAS][COLUNAS];
 
-//Extrai mapa do arquivo
+//Extrai mapa do arquivo e carrega dados em memória
 void cria_shop(){
   int i,j;
   char cel;
@@ -29,14 +31,19 @@ void cria_shop(){
         inicio_pessoa[1] = j;
         cel = '.'; 
       }
+      //checa se é a posição de saida das pessoas
+      if(cel == 's'){
+        saida_pessoa[0] = i;
+        saida_pessoa[1] = j;
+        cel = '.';
+      }  
       //checa se é a posição de inicio de carros
       if(cel == 'c'){
         inicio_carro[0] = i;
         inicio_carro[1] = j;
         cel = '*';
       }       
-
-      shop[i][j] = cel;               // atribui char a matriz
+      shop[i][j] = cel;                 // atribui char a matriz
       pthread_mutex_init(&mlock[i][j]); //inicializa lock da celula
     }
   }
@@ -59,26 +66,12 @@ void inicia_pessoa(){
   int coluna;
 
   coluna = inicio_pessoa[1];
-  pthread_mutex_lock(&inips);
   linha = inicio_pessoa[0];
-  pthread_mutex_unlock(&inips);
   
-  pthread_mutex_lock(&mlock[linha][coluna]);
-  
-  if (valido(linha,coluna)){
-    
-    shop[linha][coluna] = 'P';
-    pthread_mutex_lock(&inips);
-    inicio_pessoa[0] +=1 
-    pthread_mutex_unlock(&inips);
-    
-    return 0;
-  } else {
-    
-  }
-  inicio_pessoa[0] += 1;
-  
-  
+  pthread_mutex_lock(&mlock[linha][coluna]); // Pega lock da celula
+  shop[linha][coluna] = 'P';
+
+    return 0;  
 }
 
 // pega proximo lock

@@ -1,0 +1,20 @@
+#modulos
+
+##Shopping
+* Validação de movimentação
+* Controle de concorrencia na matriz do mapa
+* acesso ao mapa
+    - cria_shop()
+    - imprime_shop
+
+##Pessoas
+- define movimentação de pessoas
+- administra atributos de pessoas
+  
+##Lojas
+- identifica e armazena todas as lojas disponiveis
+- gerencia estoque(numeração e concorrencia)
+
+##Caminhões 
+* Define movimentação dos carros
+* Abastece lojas
