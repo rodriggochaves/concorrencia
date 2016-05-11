@@ -85,8 +85,7 @@ void inicia_pessoa(celula* cel){
 }
 
 // Move caractere da celula ini para celula prox
-void mover(int* ini[],int* prox[] ){
-  printf("opa\n");
+void mover(celula* ini,celula* prox){
 }
 
 // pega proximo lock

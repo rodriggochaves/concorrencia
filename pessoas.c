@@ -17,6 +17,13 @@ void* cliente(void *arg){
   pessoa* ps = ((pessoa *) arg);
   int id = ps->id;
   inicia_pessoa(ps);
+
+  celula* prox = (celula *) malloc(sizeof(celula));
+  printf("%d\n",ps->cel->linha );
+  // prox->linha = ps->cel->linha ;
+  // prox->coluna = ps->cel->coluna ;
+  mover(ps->cel,prox);
+  
   free(ps);
   pthread_exit(0);
 }
