@@ -1,18 +1,11 @@
+#include "shop.h"
+#include "pessoa.h"
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <pthread.h>
 
-#ifndef PSHEAD
-#include "pessoa.h"
-#define PSHEAD
-#endif
-
-#ifndef SHOPHEAD
-#define SHOPHEAD
-#include "shop.h"
-#endif
 
 #define LINHAS 17
 #define COLUNAS 57
