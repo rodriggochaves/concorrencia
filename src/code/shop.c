@@ -23,7 +23,7 @@ void cria_shop(){
   char cel;
   FILE* fp;
   
-  fp=fopen("./shop.txt", "r");
+  fp=fopen("./src/files/shop.txt", "r");
   
 	for (i = 0; i < LINHAS; ++i){
    

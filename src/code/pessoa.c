@@ -1,6 +1,8 @@
 #include "pessoa.h"
 #include "shop.h"
 
+
+
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>

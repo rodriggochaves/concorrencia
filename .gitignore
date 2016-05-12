@@ -1,3 +1,6 @@
+# Ignore compilation directory  
+/build
+
 # Ignore compilation files
 *.o
 *.gch
