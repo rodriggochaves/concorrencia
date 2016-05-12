@@ -1,2 +1,10 @@
-allmake:
-	gcc -pthread -o shop shop.c pessoas.c
+CC = gcc
+
+FLAGS = -pthread -c -Wall -Wstrict-prototypes 
+
+all:
+
+dir:
+
+pessoa:
+	gcc pessoa.c
