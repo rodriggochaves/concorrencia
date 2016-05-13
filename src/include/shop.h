@@ -6,7 +6,7 @@ typedef struct Celula{
   int coluna;
 }celula;
 
-void mover(celula*,celula*);
+int mover(celula*,celula*);
 
 void cria_shop(void);
 

@@ -73,28 +73,28 @@ void inicia_pessoa(celula* cel){
   pthread_mutex_lock(&mlock[linha][coluna]); // Pega lock da celula
   shop[linha][coluna] = 'P';
   
-  cel->coluna = linha;
-  cel->linha = coluna;
+  cel->coluna = coluna;
+  cel->linha = linha;
 }
 
 
 // Move caractere da celula ini para celula prox, caso a movimentação seja valida
-void mover(celula* ini,celula* prox){
+int mover(celula* ini,celula* prox){
   
   int linha,coluna;
   int nlinha,ncoluna;
   char charini,charprox;
 
-  linha = ini[0]
-  coluna = ini[1]
+  linha = ini->linha;
+  coluna = ini->coluna;
 
-  nlinha = prox[0]
-  ncoluna = prox[1]
+  nlinha = prox->linha;
+  ncoluna = prox->coluna;
 
-  if (valido([nlinha][ncoluna])){
-    
+  if (valido(nlinha,ncoluna)){
+    // printf("esperando: %d %d\n",nlinha,ncoluna);    
     pthread_mutex_lock(&mlock[nlinha][ncoluna]);
-    pthread_mutex_unlock(&mlock[linha][ncoluna]);
+    pthread_mutex_unlock(&mlock[linha][coluna]);
     
     charini = shop[linha][coluna];
     charprox = shop[nlinha][ncoluna];
@@ -102,6 +102,8 @@ void mover(celula* ini,celula* prox){
     // Faz troca dos char das duas celulas
     shop[linha][coluna] = charprox;
     shop[nlinha][ncoluna] = charini;
+
+    // printf("movido para %d %d\n",nlinha,ncoluna );
   
     return 0;
   
@@ -113,6 +115,7 @@ void mover(celula* ini,celula* prox){
 
 //printa o shop
 void imprime_shop(){
+  // pthread_create(,NULL,thread_imprime,NULL);
   int i,j;
   for (i = 0; i < LINHAS; ++i)   {
     for (j = 0; j < COLUNAS; ++j){
