@@ -14,4 +14,6 @@ void imprime_shop(void);
 
 void inicia_pessoa(celula*);
 
+void inicia_caminhao(celula* cels[]);
+
 #endif

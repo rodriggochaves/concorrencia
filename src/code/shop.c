@@ -54,7 +54,7 @@ void cria_shop(){
   fclose(fp);
 }
 
-//retorna 1 se a celula pode ser ocupada, chamador deve conter controle de acesso da celula
+//retorna 1 se a celula pode ser ocupada e 0 caso contrário
 int valido(int linha, int coluna){
   char c = shop[linha][coluna];
   if (c != '-' && c != '|' && c != '=' && c != '_' && c != 'V'){
@@ -77,28 +77,38 @@ void inicia_pessoa(celula* cel){
   cel->linha = coluna;
 }
 
-// Move caractere da celula ini para celula prox
+
+// Move caractere da celula ini para celula prox, caso a movimentação seja valida
 void mover(celula* ini,celula* prox){
-}
+  
+  int linha,coluna;
+  int nlinha,ncoluna;
+  char charini,charprox;
 
-// pega proximo lock
-// int move_pessoa(){
+  linha = ini[0]
+  coluna = ini[1]
 
-// }
+  nlinha = prox[0]
+  ncoluna = prox[1]
 
-// int* inicio_carro(){
+  if (valido([nlinha][ncoluna])){
+    
+    pthread_mutex_lock(&mlock[nlinha][ncoluna]);
+    pthread_mutex_unlock(&mlock[linha][ncoluna]);
+    
+    charini = shop[linha][coluna];
+    charprox = shop[nlinha][ncoluna];
 
-// }
-//insere caractere que não apague os limitadores
-int atualiza_shop(int linha,int coluna,char dado){
-  //mutex lock
-  if(valido(linha,coluna)){
-    shop[linha][coluna] = dado;
+    // Faz troca dos char das duas celulas
+    shop[linha][coluna] = charprox;
+    shop[nlinha][ncoluna] = charini;
+  
     return 0;
+  
   } else {
+  
     return 1;
   }
-  //mutex unlock
 }
 
 //printa o shop
