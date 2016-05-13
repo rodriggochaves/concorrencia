@@ -74,7 +74,7 @@ new:
 	@ mkdir -p $(INCLUDEDIR)
 
 	@ echo "Criando diretório '$(FILESDIR)'..."
-
+	@ mkdir -p $(FILESDIR)
 
 # Limpa diretório de compilação
 clean:
