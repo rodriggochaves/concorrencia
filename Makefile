@@ -85,5 +85,5 @@ new:
 
 # Limpa diretório de compilação
 clean:
-	@ rm -f $(BUILDDIR)/*.o $(BUILDDIR)/$(EXECUTABLE)
-	@ echo "Limpando diretório '/build' "
+	@ rm -rf $(BUILDDIR)/*
+	@ echo "Limpando diretório '$(BUILDDIR)' "
