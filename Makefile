@@ -42,6 +42,11 @@ $(BUILDDIR)/%.o : $(SOURCEDIR)/%.c $(DEPS)
 run:
 	$(BUILDDIR)/$(EXECUTABLE)
 
+# Cria novo modulo
+module:
+	touch $(patsubst %,$(SOURCEDIR)/%.c,$(name))
+	touch $(patsubst %,$(INCLUDEDIR)/%.h,$(name))
+
 # Limpa diretório de compilação
 clean:
 	@ rm -f $(BUILDDIR)/*.o $(BUILDDIR)/$(EXECUTABLE)
