@@ -8,10 +8,16 @@ CFLAGS = -Wall -Wstrict-prototypes
 LIBS= -pthread
 
 # Diretórios de código fonte e de compilação
+SRC = src
 INC = include
-INCLUDEDIR := src/$(INC)
-SOURCEDIR = src/code
+CODE = code
+FILES = files
+
+INCLUDEDIR := $(SRC)/$(INC)
+SOURCEDIR := $(SRC)/$(CODE)
+FILESDIR := $(SRC)/$(FILES)
 BUILDDIR = build
+
 
 # Nome do executavel
 EXECUTABLE = shop
@@ -50,13 +56,24 @@ module:
 	$(eval INCFILE = $(INCLUDEDIR)/$(name).h)
 	$(eval UPPERNAME = $(shell echo $(name) | tr '[:lower:]' '[:upper:]'))
 
-# Cria arquivos
+# Cria arquivos e escreve diretivas do preprocessador
 	@ echo "Criando '$(SFILE)'..."
 	@ echo "#include \"../$(INC)/$(name).h\"" >> $(SFILE)
 	@ echo "Criando '$(INCFILE)'..."
 	@ echo "#ifndef $(UPPERNAME)_H\n#define $(UPPERNAME)_H\n\n#endif" >> $(INCFILE)
 
-# Escreve no arquivo
+# Cria diretórios do projeto
+new:
+	@ echo "Criando diretório '$(SRC)'..."
+	@ mkdir -p $(SRC)
+	
+	@ echo "Criando diretório '$(SOURCEDIR)'..."
+	@ mkdir -p $(SOURCEDIR)
+
+	@ echo "Criando diretório '$(INCLUDEDIR)'..."
+	@ mkdir -p $(INCLUDEDIR)
+
+	@ echo "Criando diretório '$(FILESDIR)'..."
 
 
 # Limpa diretório de compilação
