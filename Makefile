@@ -8,6 +8,7 @@ CFLAGS = -Wall -Wstrict-prototypes
 LIBS= -pthread
 
 # Dirtorios de código fonte e de compilação
+INCLUDEDIR = src/include
 SOURCEDIR = src/code
 BUILDDIR = build
 
@@ -15,7 +16,7 @@ BUILDDIR = build
 EXECUTABLE = shop
 
 # Dependências .h, Códigos fonte .c e objetos .o 
-DEPS = $(wildcard $(SOURCEDIR)/*.h)
+DEPS = $(wildcard $(INCLUDEDIR)/*.h)
 SOURCES = $(wildcard $(SOURCEDIR)/*.c)
 OBJ = $(patsubst $(SOURCEDIR)/%.c,$(BUILDDIR)/%.o,$(SOURCES))
 

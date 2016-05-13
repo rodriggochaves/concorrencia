@@ -1,5 +1,5 @@
-#include "shop.h"
-#include "pessoa.h"
+#include "../include/shop.h"
+#include "../include/pessoa.h"
 
 #include <stdio.h>
 #include <unistd.h>
