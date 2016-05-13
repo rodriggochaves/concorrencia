@@ -7,8 +7,9 @@ CFLAGS = -Wall -Wstrict-prototypes
 #Bibliotecas utilizadas
 LIBS= -pthread
 
-# Dirtorios de código fonte e de compilação
-INCLUDEDIR = src/include
+# Diretórios de código fonte e de compilação
+INC = include
+INCLUDEDIR := src/$(INC)
 SOURCEDIR = src/code
 BUILDDIR = build
 
@@ -42,10 +43,21 @@ $(BUILDDIR)/%.o : $(SOURCEDIR)/%.c $(DEPS)
 run:
 	$(BUILDDIR)/$(EXECUTABLE)
 
-# Cria novo modulo
+# Cria novo modulo de acordo com o parametro "name"
+# ex: make module name=main
 module:
-	touch $(patsubst %,$(SOURCEDIR)/%.c,$(name))
-	touch $(patsubst %,$(INCLUDEDIR)/%.h,$(name))
+	$(eval SFILE = $(SOURCEDIR)/$(name).c)
+	$(eval INCFILE = $(INCLUDEDIR)/$(name).h)
+	$(eval UPPERNAME = $(shell echo $(name) | tr '[:lower:]' '[:upper:]'))
+
+# Cria arquivos
+	@ echo "Criando '$(SFILE)'..."
+	@ echo "#include \"../$(INC)/$(name).h\"" >> $(SFILE)
+	@ echo "Criando '$(INCFILE)'..."
+	@ echo "#ifndef $(UPPERNAME)_H\n#define $(UPPERNAME)_H\n\n#endif" >> $(INCFILE)
+
+# Escreve no arquivo
+
 
 # Limpa diretório de compilação
 clean:
