@@ -43,13 +43,20 @@ $(BUILDDIR)/$(EXECUTABLE): $(OBJ)
 
 $(BUILDDIR)/%.o : $(SOURCEDIR)/%.c $(DEPS)
 	@ $(CC) $< $(CFLAGS) -c -o $@
-	@ echo 'Compilando arquivo: $(patsubst $(SOURCEDIR)/%.c,%.c,$<)'
+	@ echo 'Compilando o arquivo: $(patsubst $(SOURCEDIR)/%.c,%.c,$<)'
+
+# Compilação por objeto de acordo com o parâmetro "name"
+
+obj: $(SOURCEDIR)/$(name).c $(DEPS)
+	@ $(CC) $< -c -o $(BUILDDIR)/$(name).o
+	@ echo "Compilando o arquivo: $(name).c"
 
 # Executa programa
 run:
-	$(BUILDDIR)/$(EXECUTABLE)
+	@ echo "Abrindo executável $(EXECUTABLE)"
+	@ $(BUILDDIR)/$(EXECUTABLE)
 
-# Cria novo modulo de acordo com o parametro "name"
+# Cria novo modulo de acordo com o parâmetro "name"
 # ex: make module name=main
 module:
 	$(eval SFILE = $(SOURCEDIR)/$(name).c)
