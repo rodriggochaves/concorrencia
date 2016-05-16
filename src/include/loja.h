@@ -3,12 +3,14 @@
 
 #define LOJAS 9
 #define LOJA_INIT_CHAR 'V'
+#define ESTOQUE_MAX 30
 
 struct celula;
 typedef struct Celula celula;
 
 typedef struct Loja{
   int id;       // Identificador
+  int estoque;
   char sim;     // Simbolo de representação da loja
   celula* pos;  // Posição do vendedor
 }loja;

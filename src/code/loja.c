@@ -23,6 +23,7 @@ void criar_loja(int id){
   lj->pos = malloc(sizeof(celula));
   lj->id = id;
   lj->sim = sim + id;
+  lj->estoque = ESTOQUE_MAX;
   lj->pos = celula_char(LOJA_INIT_CHAR,id+1);
   dados_lojas[id] = lj;   // Torna acessivel os dados das lojas por id
   pthread_create(&lojas[id],NULL,loja_thread,(void*) (lj));
