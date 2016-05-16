@@ -1,7 +1,7 @@
 #include "../include/main.h"
 #include "../include/pessoa.h"
 #include "../include/shop.h"
-
+#include "../include/loja.h"
 #include <stdio.h>
 
 int main(void){
