@@ -80,6 +80,27 @@ void inicia_pessoa(celula* cel){
   cel->coluna = coluna;
 }
 
+// Recebe um caractere e o número de sua ocorrência e retorna ponteiro pra celula
+// ou NULL caso essa ocorrência não exista
+celula* celula_char(char alvo,int ocor){
+  celula* cel = malloc(sizeof(celula));
+  int i,j,cont_sim = 0;
+
+  for (i = 0; i < LINHAS; ++i){
+    for(j=0;j < COLUNAS;j++){
+      if(shop[i][j] == alvo){
+        cont_sim += 1;
+        if (cont_sim == ocor){
+          cel->linha = i;
+          cel->coluna = j;
+          return cel;
+        }
+      }
+    }
+  }
+  return NULL;
+}
+
 // Libera a celula passada e substitui pelo caractere passado
 void remover(celula* cel,char c){
   shop[cel->linha][cel->coluna] = c;
