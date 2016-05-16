@@ -1,6 +1,6 @@
 #include "../include/pessoa.h"
 #include "../include/shop.h"
-
+#include "../include/loja.h"
 
 
 #include <pthread.h>
@@ -111,16 +111,21 @@ int voltar_pessoa(celula* ps,celula* saida){
 }
 
 void* cliente(void *arg){
+  
   pessoa* ps = ((pessoa *) arg);
+  
   celula* loja = malloc(sizeof(celula));
   celula* saida = malloc(sizeof(celula));
+  
+  int total_loja = total_lojas();
+  
   // Insere pessoa no mapa
   inicia_pessoa(ps->cel);
 
   saida = celula_saida_pessoa();
   //substituir por vendedor
-  loja->linha = 12;
-  loja->coluna = 5;
+  
+  loja = pos_loja(rand()%total_loja);
 
   while(!avancar_pessoa(ps->cel,loja)){
     pthread_mutex_lock(&print);

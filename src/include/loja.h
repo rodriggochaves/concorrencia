@@ -19,4 +19,6 @@ void destruir_loja(int);
 
 int total_lojas(void);
 
+celula* pos_loja(int);
+
 #endif
