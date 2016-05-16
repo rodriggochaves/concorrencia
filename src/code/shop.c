@@ -92,7 +92,7 @@ int mover(celula* ini,celula* prox){
   ncoluna = prox->coluna;
 
   if (valido(nlinha,ncoluna)){
-    // printf("esperando: %d %d\n",nlinha,ncoluna);    
+  
     pthread_mutex_lock(&mlock[nlinha][ncoluna]);
     pthread_mutex_unlock(&mlock[linha][coluna]);
     
