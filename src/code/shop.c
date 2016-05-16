@@ -98,7 +98,9 @@ int mover(celula* ini,celula* prox){
     
     charini = shop[linha][coluna];
     charprox = shop[nlinha][ncoluna];
-
+    if(charini == '.'){
+      printf("OPA,opa\n");
+    }
     // Faz troca dos char das duas celulas
     shop[linha][coluna] = charprox;
     shop[nlinha][ncoluna] = charini;
@@ -124,7 +126,7 @@ void imprime_shop(){
   }
   printf("\n");
   fflush(stdout);
-  sleep(1);
+  usleep(50000);
 }
 
 /*
