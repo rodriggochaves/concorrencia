@@ -94,12 +94,10 @@ int mover(celula* ini,celula* prox){
 
   if (valido(nlinha,ncoluna)){
     pthread_mutex_lock(&mlock[nlinha][ncoluna]);
-    pthread_mutex_unlock(&mlock[linha][coluna]);
     
     charini = shop[linha][coluna];
     charprox = shop[nlinha][ncoluna];
     if(charini == '.'){
-      printf("OPA,opa\n");
       charini = '*';
     }
     // Faz troca dos char das duas celulas
@@ -107,6 +105,7 @@ int mover(celula* ini,celula* prox){
     shop[nlinha][ncoluna] = charini;
 
     // printf("movido para %d %d\n",nlinha,ncoluna );
+    pthread_mutex_unlock(&mlock[linha][coluna]);
   
     return 0;
   

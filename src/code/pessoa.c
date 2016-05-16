@@ -12,7 +12,8 @@
 pthread_t pessoas[PESSOAS];
 pthread_mutex_t print = PTHREAD_MUTEX_INITIALIZER;
 
-// Verifica para onde a pessoa deve andar
+// Verifica para onde a pessoa deve andar para se aproximar do vendedor
+// Essa função funciona apenas para a movimentação em cruz usada no shop
 int avancar_pessoa(celula* ps,celula* loja){
   celula* aux = malloc(sizeof(celula));
   aux->linha = ps->linha;
