@@ -26,8 +26,8 @@ int avancar_pessoa(celula* ps,celula* loja){
     aux->coluna = ps->coluna + 1;
     // printf("coluna menor aux: %d\n",aux->coluna);
     flag = mover(ps,aux);
-  }
-  else{
+
+  } else {
     if(ps->coluna == loja->coluna){
       if(ps->linha < (loja->linha - 1)){
         aux->linha = ps->linha + 1;
@@ -47,17 +47,18 @@ int avancar_pessoa(celula* ps,celula* loja){
     ps->linha = aux->linha;
     ps->coluna = aux->coluna;
     return flag;
-  }
-  else{
+  } else {
     return flag;
   }
 }
 
 // 
 int meia_volta(celula* ps){
+  
   celula* aux = malloc(sizeof(celula));
   aux->linha = ps->linha;
   aux->coluna = ps->coluna + 1;
+
   return mover(ps,aux);
 }
 
@@ -66,12 +67,35 @@ int voltar_pessoa(celula* ps,celula* saida){
   
   // Se flag diferente de 0 houve uma movimentação
   int flag = 0;
+  int dif;
   celula* aux = malloc(sizeof(celula));
   aux->linha = ps->linha;
   aux->coluna = ps->coluna;
 
-  if(ps->linha == saida->linha ){
+  if(ps->linha == saida->linha && ps->coluna != saida->coluna ){
+    aux->coluna -= 1;
+    flag = mover(ps,aux);
+  } else {
+    dif = ps->linha - saida->linha;
+    if(dif < 0){
+      aux->linha += 1;
+      flag = mover(ps,aux);
+    } else {
+      aux->linha -= 1;
+      flag = mover(ps,aux);
+    }
+  } else {
+    // Chegou na saida
+    flag = 1;
+  }
 
+  if(!flag){
+    ps->linha = aux->linha;
+    ps->coluna = aux->coluna;
+    return flag;
+  }
+  else{
+    return flag;
   }
 }
 
@@ -94,7 +118,7 @@ void* cliente(void *arg){
     pthread_mutex_unlock(&print);
   }
   meia_volta(ps->cel);
-    
+  while()  
   // for (i = 0; i < 10; ++i){
   //   if(!mover(ps->cel,prox)){
   //     ps->cel->linha = prox->linha;
