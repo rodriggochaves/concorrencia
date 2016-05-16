@@ -78,6 +78,7 @@ void inicia_pessoa(celula* cel){
 }
 
 
+
 // Move caractere da celula ini para celula prox, caso a movimentação seja valida
 int mover(celula* ini,celula* prox){
   
@@ -92,7 +93,6 @@ int mover(celula* ini,celula* prox){
   ncoluna = prox->coluna;
 
   if (valido(nlinha,ncoluna)){
-  
     pthread_mutex_lock(&mlock[nlinha][ncoluna]);
     pthread_mutex_unlock(&mlock[linha][coluna]);
     
@@ -100,6 +100,7 @@ int mover(celula* ini,celula* prox){
     charprox = shop[nlinha][ncoluna];
     if(charini == '.'){
       printf("OPA,opa\n");
+      charini = '*';
     }
     // Faz troca dos char das duas celulas
     shop[linha][coluna] = charprox;
@@ -113,6 +114,13 @@ int mover(celula* ini,celula* prox){
   
     return 1;
   }
+}
+
+celula* celula_saida_pessoa(){
+  celula* cel = malloc(sizeof(celula));
+  cel->linha = 1;
+  cel->coluna = 1;
+  return cel;
 }
 
 //printa o shop

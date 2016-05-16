@@ -16,7 +16,7 @@ pthread_mutex_t print = PTHREAD_MUTEX_INITIALIZER;
 int avancar_pessoa(celula* ps,celula* loja){
   celula* aux = malloc(sizeof(celula));
   aux->linha = ps->linha;
-  aux->coluna = aux->coluna;
+  aux->coluna = ps->coluna;
   int flag = 0;
 
   if(ps->coluna < loja->coluna){
@@ -32,8 +32,11 @@ int avancar_pessoa(celula* ps,celula* loja){
       if( ps->linha > (loja->linha + 1)){
         aux->linha = ps->linha - 1;
       }
-      // printf("coluna igual\n");
-      flag = mover(ps,aux);
+      if( ps->linha == (loja->linha - 1) || ps->linha == (loja->linha + 1) ){
+        flag = 1;
+      } else {  
+        flag = mover(ps,aux);
+      }
     } 
   }
 
@@ -45,9 +48,6 @@ int avancar_pessoa(celula* ps,celula* loja){
   else{
     return flag;
   }
-
-  // printf("nada\n");
-  return 0;
 }
 
 void* cliente(void *arg){
@@ -56,12 +56,12 @@ void* cliente(void *arg){
 
   inicia_pessoa(ps->cel);
 
-  loja->linha = 7;
-  loja->coluna = 10;
-  while(1){
-    avancar_pessoa(ps->cel,loja);
+  loja->linha = 12;
+  loja->coluna = 5;
+  while(!avancar_pessoa(ps->cel,loja)){
     pthread_mutex_lock(&print);
     imprime_shop();
+    printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
     pthread_mutex_unlock(&print);
   }
   
