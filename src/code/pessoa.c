@@ -79,7 +79,9 @@ int voltar_pessoa(celula* ps,celula* saida){
   aux->linha = ps->linha;
   aux->coluna = ps->coluna;
 
+  printf("pl: %d sl: %d\n",ps->linha,saida->linha );
   if(ps->linha == saida->linha){
+    printf("entrou 1\n");
     if (ps->coluna != saida->coluna){
       aux->coluna -= 1;
       flag = mover(ps,aux);
@@ -88,6 +90,7 @@ int voltar_pessoa(celula* ps,celula* saida){
       flag = 1;
     }
   } else {
+    printf("entrou 2\n");
     dif = ps->linha - saida->linha;
     if(dif < 0){
       aux->linha += 1;
@@ -114,7 +117,7 @@ void* cliente(void *arg){
   // Insere pessoa no mapa
   inicia_pessoa(ps->cel);
 
-  // 
+  saida = celula_saida_pessoa();
   //substituir por vendedor
   loja->linha = 12;
   loja->coluna = 10;
@@ -127,12 +130,16 @@ void* cliente(void *arg){
   }
   meia_volta(ps->cel);
   printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
+  pthread_mutex_lock(&print);
+  imprime_shop();
+  pthread_mutex_unlock(&print); 
   while(!voltar_pessoa(ps->cel,saida)){
     pthread_mutex_lock(&print);
     imprime_shop();
     printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
     pthread_mutex_unlock(&print); 
   }
+
   // for (i = 0; i < 10; ++i){
   //   if(!mover(ps->cel,prox)){
   //     ps->cel->linha = prox->linha;
