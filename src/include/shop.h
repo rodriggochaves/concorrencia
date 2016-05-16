@@ -18,4 +18,5 @@ void inicia_caminhao(celula* cels[]);
 
 celula* celula_saida_pessoa(void);
 
+void remover(celula*,char);
 #endif

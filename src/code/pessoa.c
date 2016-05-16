@@ -120,12 +120,12 @@ void* cliente(void *arg){
   saida = celula_saida_pessoa();
   //substituir por vendedor
   loja->linha = 12;
-  loja->coluna = 10;
+  loja->coluna = 5;
 
   while(!avancar_pessoa(ps->cel,loja)){
     pthread_mutex_lock(&print);
-    imprime_shop();
     printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
+    imprime_shop();
     pthread_mutex_unlock(&print);
   }
   meia_volta(ps->cel);
@@ -135,10 +135,16 @@ void* cliente(void *arg){
   pthread_mutex_unlock(&print); 
   while(!voltar_pessoa(ps->cel,saida)){
     pthread_mutex_lock(&print);
-    imprime_shop();
     printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
+    imprime_shop();
     pthread_mutex_unlock(&print); 
   }
+
+  pthread_mutex_lock(&print);
+  remover(ps->cel,'.');
+  imprime_shop();
+  printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
+  pthread_mutex_unlock(&print); 
 
   // for (i = 0; i < 10; ++i){
   //   if(!mover(ps->cel,prox)){

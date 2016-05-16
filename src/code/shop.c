@@ -80,7 +80,11 @@ void inicia_pessoa(celula* cel){
   cel->coluna = coluna;
 }
 
-
+// Libera a celula passada e substitui pelo caractere passado
+void remover(celula* cel,char c){
+  shop[cel->linha][cel->coluna] = c;
+  pthread_mutex_unlock(&mlock[cel->linha][cel->coluna]);
+}
 
 // Move caractere da celula ini para celula prox, caso a movimentação seja valida
 int mover(celula* ini,celula* prox){
