@@ -17,7 +17,10 @@ int inicio_carro[2];
 
 pthread_mutex_t mlock[LINHAS][COLUNAS];
 
-//Extrai mapa do arquivo e carrega dados em memória
+// Extrai mapa e dados do arquivo.
+// As outras funcionalidades do modulo se tornam disponiveis
+// somente após a execução dessa função.
+
 void cria_shop(){
   int i,j;
   char cel;
@@ -64,7 +67,7 @@ int valido(int linha, int coluna){
   }
 }
 
-// Pega lock inicial
+// Pega lock inicial e insere caractere no mapa
 void inicia_pessoa(celula* cel){
   
   int linha = inicio_pessoa[0];
@@ -73,8 +76,8 @@ void inicia_pessoa(celula* cel){
   pthread_mutex_lock(&mlock[linha][coluna]); // Pega lock da celula
   shop[linha][coluna] = 'P';
   
-  cel->coluna = coluna;
   cel->linha = linha;
+  cel->coluna = coluna;
 }
 
 
@@ -115,10 +118,14 @@ int mover(celula* ini,celula* prox){
   }
 }
 
+// retorna celula de saida das pessoas
 celula* celula_saida_pessoa(){
+
   celula* cel = malloc(sizeof(celula));
-  cel->linha = 1;
-  cel->coluna = 1;
+  
+  cel->linha = saida_pessoa[0];
+  cel->coluna = saida_pessoa[1];
+  
   return cel;
 }
 

@@ -15,10 +15,12 @@ pthread_mutex_t print = PTHREAD_MUTEX_INITIALIZER;
 // Verifica para onde a pessoa deve andar para se aproximar do vendedor
 // Essa função funciona apenas para a movimentação em cruz usada no shop
 int avancar_pessoa(celula* ps,celula* loja){
+  
+  // Se flag diferente de 0 houve uma movimentação
+  int flag = 0;
   celula* aux = malloc(sizeof(celula));
   aux->linha = ps->linha;
   aux->coluna = ps->coluna;
-  int flag = 0;
 
   if(ps->coluna < loja->coluna){
     aux->coluna = ps->coluna + 1;
@@ -51,21 +53,47 @@ int avancar_pessoa(celula* ps,celula* loja){
   }
 }
 
+// 
+int meia_volta(celula* ps){
+  celula* aux = malloc(sizeof(celula));
+  aux->linha = ps->linha;
+  aux->coluna = ps->coluna + 1;
+  return mover(ps,aux);
+}
+
+// Lógica de movimentação até a saida
+int voltar_pessoa(celula* ps,celula* saida){
+  
+  // Se flag diferente de 0 houve uma movimentação
+  int flag = 0;
+  celula* aux = malloc(sizeof(celula));
+  aux->linha = ps->linha;
+  aux->coluna = ps->coluna;
+
+  if(ps->linha == saida->linha ){
+
+  }
+}
+
 void* cliente(void *arg){
   pessoa* ps = ((pessoa *) arg);
   celula* loja = malloc(sizeof(celula));
-
+  celula* saida = malloc(sizeof(celula));
+  // Insere pessoa no mapa
   inicia_pessoa(ps->cel);
 
+  // 
+  //substituir por vendedor
   loja->linha = 12;
-  loja->coluna = 5;
+  loja->coluna = 10;
+
   while(!avancar_pessoa(ps->cel,loja)){
     pthread_mutex_lock(&print);
     imprime_shop();
     printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
     pthread_mutex_unlock(&print);
   }
-  
+  meia_volta(ps->cel);
     
   // for (i = 0; i < 10; ++i){
   //   if(!mover(ps->cel,prox)){
