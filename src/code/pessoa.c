@@ -58,8 +58,15 @@ int meia_volta(celula* ps){
   celula* aux = malloc(sizeof(celula));
   aux->linha = ps->linha;
   aux->coluna = ps->coluna + 1;
-
-  return mover(ps,aux);
+  if(mover(ps,aux)){
+    
+    return 1;
+  } else {
+    
+    ps->linha = aux->linha;
+    ps->coluna = aux->coluna;
+    return 0;
+  }
 }
 
 // Lógica de movimentação até a saida
@@ -72,9 +79,14 @@ int voltar_pessoa(celula* ps,celula* saida){
   aux->linha = ps->linha;
   aux->coluna = ps->coluna;
 
-  if(ps->linha == saida->linha && ps->coluna != saida->coluna ){
-    aux->coluna -= 1;
-    flag = mover(ps,aux);
+  if(ps->linha == saida->linha){
+    if (ps->coluna != saida->coluna){
+      aux->coluna -= 1;
+      flag = mover(ps,aux);
+    } else {
+      // Chegou na saida
+      flag = 1;
+    }
   } else {
     dif = ps->linha - saida->linha;
     if(dif < 0){
@@ -84,11 +96,7 @@ int voltar_pessoa(celula* ps,celula* saida){
       aux->linha -= 1;
       flag = mover(ps,aux);
     }
-  } else {
-    // Chegou na saida
-    flag = 1;
   }
-
   if(!flag){
     ps->linha = aux->linha;
     ps->coluna = aux->coluna;
@@ -118,7 +126,13 @@ void* cliente(void *arg){
     pthread_mutex_unlock(&print);
   }
   meia_volta(ps->cel);
-  while()  
+  printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
+  while(!voltar_pessoa(ps->cel,saida)){
+    pthread_mutex_lock(&print);
+    imprime_shop();
+    printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
+    pthread_mutex_unlock(&print); 
+  }
   // for (i = 0; i < 10; ++i){
   //   if(!mover(ps->cel,prox)){
   //     ps->cel->linha = prox->linha;
