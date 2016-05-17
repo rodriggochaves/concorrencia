@@ -129,6 +129,9 @@ void* cliente(void *arg){
 
   while(!avancar_pessoa(ps->cel,loja)){
     dif = ps->cel->linha - loja->linha;
+    if (dif > -2 && dif < 2){
+      comprar(loja_id);
+    }
     usleep(50000);
   }
   
