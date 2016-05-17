@@ -61,7 +61,6 @@ void criar_loja(int id){
 
 void comprar(int id){
   sem_post(&filas[id]);
-  printf("%d\n",sem_getvalue(&filas[id],NULL) );
   sem_wait(&atendimento[id]);
 }
 
