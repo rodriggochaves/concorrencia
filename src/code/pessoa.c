@@ -128,7 +128,7 @@ void* cliente(void *arg){
   loja = pos_loja(loja_id);
 
   while(!avancar_pessoa(ps->cel,loja)){
-    dif = ps->cel->coluna - loja->coluna;
+    dif = ps->cel->linha - loja->linha;
     if (dif > -2 && dif < 2){
       comprar(loja_id);
     }

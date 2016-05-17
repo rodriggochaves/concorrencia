@@ -1,6 +1,6 @@
 #ifndef PESSOA_H
 #define PESSOA_H
-#define PESSOAS 10
+#define PESSOAS 10  
 
 struct celula;
 typedef struct Celula celula;

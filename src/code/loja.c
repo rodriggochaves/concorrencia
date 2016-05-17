@@ -14,17 +14,16 @@ sem_t filas[LOJAS];
 sem_t atendimento[LOJAS];
 loja* dados_lojas[LOJAS];
 
-void vender(int* estoque,int id){
+int vender(int estoque,int id){
   pthread_mutex_lock(&lj_lock[id]);
-  if(*estoque == 0){
+  if(estoque == 0){
     // sinaliza caminhão
 
     // Espera abastecimento do caminhão
     pthread_cond_wait(&estoque_cond[id],&lj_lock[id]);
   }
-  *estoque -= 1;
-  sem_post(&atendimento[id]);
   pthread_mutex_unlock(&lj_lock[id]);
+  return estoque - 1;
 }
 
 void* loja_thread(void* arg){
@@ -32,7 +31,8 @@ void* loja_thread(void* arg){
 
   while(sem_wait(&filas[lj->id])){
     // code
-    vender(&lj->estoque,lj->id);
+    lj->estoque = vender(lj->estoque,lj->id);
+    sem_post(&atendimento[lj->id]);
   }
   pthread_exit(0);
 }
@@ -46,11 +46,12 @@ void criar_loja(int id){
   // Inicialização da struct
   lj->id = id;
   lj->estoque = ESTOQUE_MAX;
+
   lj->pos = celula_char(LOJA_INIT_CHAR,id+1);
 
   // Inicialização de vetores relacionados
   dados_lojas[id] = lj;   // Torna acessivel os dados das lojas por id
-  sem_init(&filas[id],0,FILA_MAX);
+  sem_init(&filas[id],0,0);
   sem_init(&atendimento[id],0,FILA_MAX);
   pthread_mutex_init(&lj_lock[id],NULL);
   pthread_cond_init(&estoque_cond[id],NULL);
@@ -65,6 +66,12 @@ void comprar(int id){
 
 int total_lojas(){
   return LOJAS;
+}
+
+int estoque_loja(int id){
+  int estoq = dados_lojas[id]->estoque;
+  printf("estoque:%d ", estoq);
+  return 1;
 }
 
 celula* pos_loja(int id){

@@ -21,4 +21,5 @@ celula* celula_char(char,int);
 celula* celula_saida_pessoa(void);
 
 void remover(celula*,char);
+
 #endif

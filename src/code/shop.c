@@ -1,5 +1,6 @@
 #include "../include/shop.h"
 #include "../include/pessoa.h"
+#include "../include/loja.h"
 
 #include <stdio.h>
 #include <unistd.h>
@@ -167,13 +168,20 @@ celula* celula_saida_pessoa(){
 
 //printa o shop
 void imprime_shop(){
-  // pthread_create(,NULL,thread_imprime,NULL);
-  int i,j;
+  int i,j,aux;
   for (i = 0; i < LINHAS; ++i)   {
     for (j = 0; j < COLUNAS; ++j){
       printf("%c",shop[i][j]);        
     }
   }
+  printf("\n");
+  for (i = 0; i < LOJAS; ++i){
+    estoque_loja(i);
+    printf("%d", i);
+    if(i%4 == 0){
+      printf("\n");    
+    }
+  } 
   printf("\n");
   fflush(stdout);
   usleep(50000);

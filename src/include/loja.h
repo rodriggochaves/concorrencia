@@ -3,7 +3,7 @@
 
 #define LOJAS 9
 #define LOJA_INIT_CHAR 'V'
-#define ESTOQUE_MAX 5
+#define ESTOQUE_MAX 10
 #define FILA_MAX 2
 
 struct celula;
@@ -22,6 +22,8 @@ void destruir_loja(int);
 void comprar(int);
 
 int total_lojas(void);
+
+int estoque_loja(int);
 
 celula* pos_loja(int);
 
