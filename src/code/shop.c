@@ -16,10 +16,13 @@ int saida_pessoa[2];
 int inicio_carro[2];
 
 pthread_mutex_t mlock[LINHAS][COLUNAS];
+pthread_t printer;
 
 // Extrai mapa e dados do arquivo.
 // As outras funcionalidades do modulo se tornam disponiveis
 // somente após a execução dessa função.
+
+void* print_thread(void*);
 
 void cria_shop(){
   int i,j;
@@ -55,8 +58,14 @@ void cria_shop(){
     }
   }
   fclose(fp);
+  pthread_create(&printer,NULL,print_thread,NULL);
 }
 
+void* print_thread(void* arg){
+  while(1){
+    imprime_shop();
+  }
+}
 //retorna 1 se a celula pode ser ocupada e 0 caso contrário
 int valido(int linha, int coluna){
   char c = shop[linha][coluna];
@@ -125,6 +134,8 @@ int mover(celula* ini,celula* prox){
     
     charini = shop[linha][coluna];
     charprox = shop[nlinha][ncoluna];
+    
+    // Lembrar de apagar isso aqui
     if(charini == '.'){
       charini = '*';
     }

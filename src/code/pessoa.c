@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <semaphore.h>
+
 
 pthread_t pessoas[PESSOAS];
 pthread_mutex_t print = PTHREAD_MUTEX_INITIALIZER;
@@ -24,7 +24,6 @@ int avancar_pessoa(celula* ps,celula* loja){
 
   if(ps->coluna < loja->coluna){
     aux->coluna = ps->coluna + 1;
-    // printf("coluna menor aux: %d\n",aux->coluna);
     flag = mover(ps,aux);
 
   } else {
@@ -79,9 +78,7 @@ int voltar_pessoa(celula* ps,celula* saida){
   aux->linha = ps->linha;
   aux->coluna = ps->coluna;
 
-  printf("pl: %d sl: %d\n",ps->linha,saida->linha );
   if(ps->linha == saida->linha){
-    printf("entrou 1\n");
     if (ps->coluna != saida->coluna){
       aux->coluna -= 1;
       flag = mover(ps,aux);
@@ -90,7 +87,6 @@ int voltar_pessoa(celula* ps,celula* saida){
       flag = 1;
     }
   } else {
-    printf("entrou 2\n");
     dif = ps->linha - saida->linha;
     if(dif < 0){
       aux->linha += 1;
@@ -128,38 +124,16 @@ void* cliente(void *arg){
   loja = pos_loja(rand()%total_loja);
 
   while(!avancar_pessoa(ps->cel,loja)){
-    pthread_mutex_lock(&print);
-    printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
-    imprime_shop();
-    pthread_mutex_unlock(&print);
+    usleep(50000);
   }
-  meia_volta(ps->cel);
-  printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
-  pthread_mutex_lock(&print);
-  imprime_shop();
-  pthread_mutex_unlock(&print); 
+  
+  meia_volta(ps->cel); // realiza movimentação
+  
   while(!voltar_pessoa(ps->cel,saida)){
-    pthread_mutex_lock(&print);
-    printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
-    imprime_shop();
-    pthread_mutex_unlock(&print); 
+    usleep(50000);
   }
 
-  pthread_mutex_lock(&print);
   remover(ps->cel,'.');
-  imprime_shop();
-  printf("linha:%d coluna:%d\n",ps->cel->linha,ps->cel->coluna );
-  pthread_mutex_unlock(&print); 
-
-  // for (i = 0; i < 10; ++i){
-  //   if(!mover(ps->cel,prox)){
-  //     ps->cel->linha = prox->linha;
-  //     ps->cel->coluna = prox->coluna;
-  //   }
-  //   prox->coluna += 1;
-  // }
-  // prox->linha = ps->cel->linha ;
-  // prox->coluna = ps->cel->coluna ;
 
   free(ps);
   pthread_exit(0);
