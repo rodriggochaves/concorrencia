@@ -16,6 +16,8 @@ void inicia_pessoa(celula*);
 
 void inicia_caminhao(celula* cels[]);
 
+void print_init(void);
+
 celula* celula_char(char,int);
 
 celula* celula_saida_pessoa(void);

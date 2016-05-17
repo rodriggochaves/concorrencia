@@ -27,10 +27,10 @@ int vender(int estoque,int id){
 }
 
 void* loja_thread(void* arg){
-  loja* lj = ((loja *) arg);
 
+  loja* lj = ((loja *) arg);
   while(sem_wait(&filas[lj->id])){
-    // code
+    printf("oi\n");
     lj->estoque = vender(lj->estoque,lj->id);
     sem_post(&atendimento[lj->id]);
   }
@@ -52,7 +52,7 @@ void criar_loja(int id){
   // Inicialização de vetores relacionados
   dados_lojas[id] = lj;   // Torna acessivel os dados das lojas por id
   sem_init(&filas[id],0,0);
-  sem_init(&atendimento[id],0,FILA_MAX);
+  sem_init(&atendimento[id],0,0);
   pthread_mutex_init(&lj_lock[id],NULL);
   pthread_cond_init(&estoque_cond[id],NULL);
 
@@ -61,6 +61,7 @@ void criar_loja(int id){
 
 void comprar(int id){
   sem_post(&filas[id]);
+  printf("%d\n",sem_getvalue(&filas[id],NULL) );
   sem_wait(&atendimento[id]);
 }
 
@@ -69,8 +70,8 @@ int total_lojas(){
 }
 
 int estoque_loja(int id){
-  int estoq = dados_lojas[id]->estoque;
-  printf("estoque:%d ", estoq);
+  loja* lj = dados_lojas[id];
+  printf("estoque:%d ", lj->estoque);
   return 1;
 }
 

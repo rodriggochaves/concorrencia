@@ -16,6 +16,7 @@ int main(void){
   for (i = 0; i < LOJAS; ++i){
     criar_loja(i);
   }
+  print_init();
   for(i = 0; i<PESSOAS;i++){
     criar_pessoa(i);
   }

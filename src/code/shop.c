@@ -59,6 +59,10 @@ void cria_shop(){
     }
   }
   fclose(fp);
+  
+}
+
+void print_init(){
   pthread_create(&printer,NULL,print_thread,NULL);
 }
 
@@ -177,14 +181,14 @@ void imprime_shop(){
   printf("\n");
   for (i = 0; i < LOJAS; ++i){
     estoque_loja(i);
-    printf("%d", i);
+    printf("id :%d | ", i);
     if(i%4 == 0){
       printf("\n");    
     }
   } 
   printf("\n");
   fflush(stdout);
-  usleep(50000);
+  sleep(2);
 }
 
 /*
