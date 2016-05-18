@@ -173,17 +173,18 @@ celula* celula_saida_pessoa(){
 //printa o shop
 void imprime_shop(){
   int i,j,aux;
+  char cel;
   system("clear");
   for (i = 0; i < LINHAS; ++i)   {
     for (j = 0; j < COLUNAS; ++j){
-      printf("%c",shop[i][j]);        
+      cel = shop[i][j];
+      printf("%c",cel);        
     }
   }
   printf("\n");
   for(i=0;i < LOJAS; i++){
     aux = estoque_loja(i);
-    printf("|id: %d ",i);
-    printf("estoque : %d| ",aux);
+    printf("|id: %d estoque : %d|",i,aux);
     if(i%3 == 2)
       printf("\n");
   }
