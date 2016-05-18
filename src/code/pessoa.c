@@ -133,13 +133,13 @@ void* cliente(void *arg){
     if (dif > -2 && dif < 2){
       comprar(loja_id);
     }
-    usleep(50000);
+    usleep(100000);
   }
   
   meia_volta(ps->cel); // realiza movimentação
-  
+  usleep(100000);
   while(!voltar_pessoa(ps->cel,saida)){
-    usleep(50000);
+    usleep(100000);
   }
 
   remover(ps->cel,'.');
