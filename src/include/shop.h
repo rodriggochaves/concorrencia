@@ -30,10 +30,14 @@
 
 
 #endif
+
 typedef struct Celula{
   int linha;
   int coluna;
 }celula;
+
+struct pos_carro;
+typedef struct Pos_carro pos_carro;
 
 int mover(celula*,celula*);
 
@@ -43,7 +47,7 @@ void imprime_shop(void);
 
 void inicia_pessoa(celula*);
 
-void inicia_caminhao(celula* cels[]);
+void inicia_carro(pos_carro*);
 
 void print_init(void);
 

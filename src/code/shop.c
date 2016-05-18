@@ -1,6 +1,7 @@
 #include "../include/shop.h"
 #include "../include/pessoa.h"
 #include "../include/loja.h"
+#include "../include/carro.h"
 
 #include <stdio.h>
 #include <unistd.h>
@@ -83,7 +84,7 @@ int valido(int linha, int coluna){
   }
 }
 
-// Pega lock inicial e insere caractere no mapa
+// RecebePega lock inicial e insere caractere no mapa
 void inicia_pessoa(celula* cel){
   
   int linha = inicio_pessoa[0];
@@ -95,6 +96,48 @@ void inicia_pessoa(celula* cel){
   
   cel->linha = linha;
   cel->coluna = coluna;
+}
+
+// Retorna uma celula que contem a posição inicial dos carros
+celula* celula_entrada_carro(void){
+
+  celula* cel = malloc(sizeof(celula));
+
+  cel->linha = inicio_carro[0];
+  cel->coluna = inicio_carro[1];
+
+  return cel;
+}
+
+// Recebe uma struct das 4 celulas de posição de um carro e
+// inicializa os carro no mapa em 4 posições a partir da posição 
+// atribuindo essas celulas as recebidas
+void inicia_carro(pos_carro* pos){
+  celula* ini = celula_entrada_carro();
+  int linha = ini->linha;
+  int coluna = ini->coluna;
+  
+  // 4 locks inicias do carro
+  pthread_mutex_lock(&mlock[linha][coluna]);
+  pthread_mutex_lock(&mlock[linha+1][coluna]);
+  pthread_mutex_lock(&mlock[linha][coluna+1]);
+  pthread_mutex_lock(&mlock[linha+1][coluna+1]);
+  
+  pos->topo_d->linha  = linha;
+  pos->topo_d->coluna = coluna + 1;
+  shop[linha][coluna+1] = 'C';
+
+  pos->baixo_d->linha  = linha + 1;
+  pos->baixo_d->coluna = coluna + 1;
+  shop[linha+1][coluna+1] = 'C';
+  
+  pos->topo_e->linha  = linha;
+  pos->topo_e->coluna = coluna;
+  shop[linha][coluna] = 'C';
+  
+  pos->baixo_e->linha  = linha +1;
+  pos->baixo_e->coluna = coluna;
+  shop[linha+1][coluna] = 'C';
 }
 
 // Recebe um caractere e o número de sua ocorrência e retorna ponteiro pra celula

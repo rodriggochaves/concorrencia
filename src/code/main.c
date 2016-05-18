@@ -2,6 +2,7 @@
 #include "../include/pessoa.h"
 #include "../include/shop.h"
 #include "../include/loja.h"
+#include "../include/carro.h"
 
 #include <stdio.h>
 #include <time.h>
@@ -16,12 +17,15 @@ int main(void){
   for (i = 0; i < LOJAS; ++i){
     criar_loja(i);
   }
-  print_init();
-  for(i = 0; i<PESSOAS;i++){
+  print_init(); // inicializa impressão do mapa
+  for (i=0;i< PESSOAS; ++i){
     criar_pessoa(i);
   }
+  for (i = 0; i < CARROS; ++i){
+    criar_carro(i);
+  }
 
-  // É relevante somente a finalização das pessoas
+  // Somente a finalização das pessoas é aguardada
   for(i=0;i<PESSOAS;i++){
     destruir_pessoa(i);
   }
