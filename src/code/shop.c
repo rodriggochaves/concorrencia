@@ -36,24 +36,26 @@ void cria_shop(){
    
 		for (j = 0; j < COLUNAS; ++j){
       cel = fgetc(fp);   
-      //checa se é a posição de inicio de pessoas   
-      if(cel == 'p'){
-        inicio_pessoa[0] = i;
-        inicio_pessoa[1] = j;
-        cel = '.'; 
-      }
-      //checa se é a posição de saida das pessoas
-      if(cel == 's'){
-        saida_pessoa[0] = i;
-        saida_pessoa[1] = j;
-        cel = '.';
-      }  
-      //checa se é a posição de inicio de carros
-      if(cel == 'c'){
-        inicio_carro[0] = i;
-        inicio_carro[1] = j;
-        cel = '*';
-      }       
+      switch(cel){
+        //checa se é a posição de inicio de pessoas
+        case 'p':
+          inicio_pessoa[0] = i;
+          inicio_pessoa[1] = j;
+          cel = '.'; 
+        break;
+        //checa se é a posição de saida das pessoas
+        case 's':
+          saida_pessoa[0] = i;
+          saida_pessoa[1] = j;
+          cel = '.';
+        break;
+        //checa se é a posição de inicio de carros
+        case 'c':
+          inicio_carro[0] = i;
+          inicio_carro[1] = j;
+          cel = '*';
+        break;
+      }          
       shop[i][j] = cel;                 // atribui char a matriz
       pthread_mutex_init(&mlock[i][j],NULL); //inicializa lock da celula
     }
