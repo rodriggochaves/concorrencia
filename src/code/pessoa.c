@@ -57,6 +57,7 @@ int meia_volta(celula* ps){
   celula* aux = malloc(sizeof(celula));
   aux->linha = ps->linha;
   aux->coluna = ps->coluna + 1;
+  sleep(1);
   if(mover(ps,aux)){
     
     return 1;

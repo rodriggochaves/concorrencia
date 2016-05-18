@@ -179,16 +179,16 @@ void imprime_shop(){
     }
   }
   printf("\n");
-  for (i = 0; i < LOJAS; ++i){
-    estoque_loja(i);
-    printf("id :%d | ", i);
-    if(i%4 == 0){
-      printf("\n");    
-    }
-  } 
+  for(i=0;i < LOJAS; i++){
+    aux = estoque_loja(i);
+    printf("|id: %d ",i);
+    printf("estoque : %d| ",aux);
+    if(i%4 == 3)
+      printf("\n");
+  }
   printf("\n");
   fflush(stdout);
-  sleep(2);
+  usleep(50000);
 }
 
 /*

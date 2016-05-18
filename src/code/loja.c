@@ -29,8 +29,8 @@ int vender(int estoque,int id){
 void* loja_thread(void* arg){
 
   loja* lj = ((loja *) arg);
-  while(sem_wait(&filas[lj->id])){
-    printf("oi\n");
+  while(1){
+    sem_wait(&filas[lj->id]);
     lj->estoque = vender(lj->estoque,lj->id);
     sem_post(&atendimento[lj->id]);
   }
@@ -61,7 +61,6 @@ void criar_loja(int id){
 
 void comprar(int id){
   sem_post(&filas[id]);
-  printf("%d\n",sem_getvalue(&filas[id],NULL) );
   sem_wait(&atendimento[id]);
 }
 
@@ -70,9 +69,7 @@ int total_lojas(){
 }
 
 int estoque_loja(int id){
-  loja* lj = dados_lojas[id];
-  printf("estoque:%d ", lj->estoque);
-  return 1;
+  return dados_lojas[id]->estoque;
 }
 
 celula* pos_loja(int id){
