@@ -178,7 +178,31 @@ void imprime_shop(){
   for (i = 0; i < LINHAS; ++i)   {
     for (j = 0; j < COLUNAS; ++j){
       cel = shop[i][j];
-      printf("%c",cel);        
+      switch(cel){
+        case '.':
+          printf(ANSI_COLOR_GREEN "%c" ANSI_COLOR_RESET, cel );
+        break;
+        case '=':
+          printf(ANSI_COLOR_BLUE "%c" ANSI_COLOR_RESET, cel );
+        break;
+        case '|':
+          printf(ANSI_COLOR_BLUE "%c" ANSI_COLOR_RESET, cel );
+        break;
+        case '-':
+          printf(ANSI_COLOR_BLUE "%c" ANSI_COLOR_RESET, cel );
+        break;
+        case '_':
+          printf(ANSI_COLOR_BLUE "%c" ANSI_COLOR_RESET, cel );
+        break;
+        case 'P':
+          printf(ANSI_COLOR_YELLOW "%c" ANSI_COLOR_RESET, cel );
+        break;
+        case '#':
+          printf(ANSI_COLOR_CYAN "%c" ANSI_COLOR_RESET, cel );
+        break;
+        default:
+          printf("%c", cel );
+      }
     }
   }
   printf("\n");

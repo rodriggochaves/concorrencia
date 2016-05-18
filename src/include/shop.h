@@ -1,6 +1,35 @@
 #ifndef SHOP_H
 #define SHOP_H
 
+#ifdef __linux__
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
+
+#define ANSI_BGCOLOR_GREEN   "\e[42m"
+#define ANSI_BGCOLOR_BLUE   "\e[44m"
+#define ANSI_BGCOLOR_RESET   "\e[49m"
+
+#else
+
+#define ANSI_COLOR_RED     ""
+#define ANSI_COLOR_GREEN   ""
+#define ANSI_COLOR_YELLOW  ""
+#define ANSI_COLOR_BLUE    ""
+#define ANSI_COLOR_MAGENTA ""
+#define ANSI_COLOR_CYAN    ""
+#define ANSI_COLOR_RESET   ""
+
+#define ANSI_BGCOLOR_GREEN   ""
+#define ANSI_BGCOLOR_BLUE    ""
+#define ANSI_BGCOLOR_RESET   ""
+
+
+#endif
 typedef struct Celula{
   int linha;
   int coluna;
