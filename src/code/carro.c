@@ -17,6 +17,8 @@ int carro_baixo(pos_carro*);
 
 void virar_carro_baixo(pos_carro*);
 
+void virar_carro_esquerda(pos_carro*);
+
 void* carro_thread(void* arg){
   carro* car = ((carro*) arg);
   car->pos = malloc(sizeof(pos_carro));
@@ -43,6 +45,9 @@ void* carro_thread(void* arg){
   while(!carro_baixo(car->pos)){
     usleep(50000);
   }
+
+  virar_carro_esquerda(car->pos);
+
   // abastece a loja
 
   // vai embora
@@ -52,6 +57,10 @@ void* carro_thread(void* arg){
 
 void virar_carro_baixo(pos_carro* pos){
   trocar_celula(pos->topo_d,pos->baixo_e);
+}
+
+void virar_carro_esquerda(pos_carro* pos){
+  trocar_celula(pos->topo_e,pos->baixo_d);
 }
 
 void chamar_carro(int id){
