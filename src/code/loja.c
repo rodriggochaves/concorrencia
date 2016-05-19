@@ -16,13 +16,13 @@ loja* dados_lojas[LOJAS];
 
 void vender(int id){
   pthread_mutex_lock(&estoque_lock[id]);
-  while(dados_lojas[id]->estoque == 0){
+  dados_lojas[id]->estoque -= 1;
+  if(dados_lojas[id]->estoque == 0){
     // sinaliza caminhão
     chamar_carro(id);
     // Espera abastecimento do caminhão
     pthread_cond_wait(&estoque_cond[id],&estoque_lock[id]);
   }
-  dados_lojas[id]->estoque -= 1;
   pthread_mutex_unlock(&estoque_lock[id]);
   
 }
