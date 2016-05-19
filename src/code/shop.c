@@ -167,6 +167,16 @@ void remover(celula* cel,char c){
   pthread_mutex_unlock(&mlock[cel->linha][cel->coluna]);
 }
 
+void trocar_celula(celula* ini,celula* fim){
+  char cini,cfim;
+
+  cini = shop[ini->linha][ini->coluna];
+  cfim = shop[fim->linha][fim->coluna];
+
+  shop[ini->linha][ini->coluna] = cfim;
+  shop[fim->linha][fim->coluna] = cini;
+}
+
 // Move caractere da celula ini para celula prox
 // caso a movimentação seja valida retorna 0 e 1 caso contrário
 int mover(celula* ini,celula* prox){
@@ -218,6 +228,20 @@ int mover_direita(celula* cel){
 
   atribui_celula(cel,aux);
   aux->coluna += 1;
+  res = mover(cel,aux);
+  if(!res){
+    atribui_celula(aux,cel);
+  }
+  return res;
+}
+
+int mover_baixo(celula* cel){
+  
+  celula* aux = malloc(sizeof(celula));
+  int res;
+
+  atribui_celula(cel,aux);
+  aux->linha += 1;
   res = mover(cel,aux);
   if(!res){
     atribui_celula(aux,cel);

@@ -57,6 +57,10 @@ void debug(int);
 
 int mover_direita(celula*);
 
+int mover_baixo(celula*);
+
+void trocar_celula(celula*,celula*);
+
 celula* celula_char(char,int);
 
 celula* celula_saida_pessoa(void);
