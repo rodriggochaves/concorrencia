@@ -132,38 +132,35 @@ void* cliente(void *arg){
   celula* saida = malloc(sizeof(celula));
   
   int total_loja = total_lojas();
-  int dif,loja_id;
-  while(1){
-    // Insere pessoa no mapa
-    inicia_pessoa(ps->cel);
+  int loja_id;
+  // Insere pessoa no mapa
+  inicia_pessoa(ps->cel);
 
-    saida = celula_saida_pessoa();
-    //substituir por vendedor
-    
-    // Define aleatoriamente a loja que a pessoa irá
-    loja_id = rand()%total_loja;
+  saida = celula_saida_pessoa();
+  //substituir por vendedor
+  
+  // Define aleatoriamente a loja que a pessoa irá
+  loja_id = rand()%total_loja;
 
-    // Descobre pelo id a posição da loja
-    loja = pos_loja(loja_id);
+  // Descobre pelo id a posição da loja
+  loja = pos_loja(loja_id);
 
-    while(!avancar_pessoa(ps->cel,loja)){
-      usleep(100000);
-    }
-    if(checar_fila(loja_id)){
-      while(!move_vertical(ps->cel,loja)){
-        usleep(100000);
-      }
-      comprar(loja_id);    
-      meia_volta(ps->cel); // realiza movimentação
-      usleep(100000);
-    }
-    while(!voltar_pessoa(ps->cel,saida)){
-      usleep(100000);
-    }
-
-    remover(ps->cel,'.');
-    
+  while(!avancar_pessoa(ps->cel,loja)){
+    usleep(100000);
   }
+  if(checar_fila(loja_id)){
+    while(!move_vertical(ps->cel,loja)){
+      usleep(100000);
+    }
+    comprar(loja_id);    
+    meia_volta(ps->cel); // realiza movimentação
+    usleep(100000);
+  }
+  while(!voltar_pessoa(ps->cel,saida)){
+    usleep(100000);
+  }
+
+  remover(ps->cel,'.');
 
   free(ps);
   pthread_exit(0);
