@@ -27,6 +27,8 @@ void abastecer_loja(int);
 
 int estoque_loja(int);
 
+int checar_fila(int);
+
 celula* pos_loja(int);
 
 #endif

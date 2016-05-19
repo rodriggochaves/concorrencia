@@ -10,7 +10,7 @@
 pthread_t lojas[LOJAS];
 pthread_cond_t estoque_cond[LOJAS];
 pthread_mutex_t estoque_lock[LOJAS];
-sem_t filas[LOJAS];
+sem_t filas[LOJAS], checar_filas[LOJAS];
 sem_t atendimento[LOJAS];
 loja* dados_lojas[LOJAS];
 
@@ -57,6 +57,7 @@ void criar_loja(int id){
   // Inicialização de vetores relacionados
   dados_lojas[id] = lj;   // Torna acessivel os dados das lojas por id
   sem_init(&filas[id],0,0);
+  sem_init(&checar_filas[id],0,FILA_MAX);
   sem_init(&atendimento[id],0,0);
   pthread_mutex_init(&estoque_lock[id],NULL);
   pthread_cond_init(&estoque_cond[id],NULL);
@@ -71,9 +72,18 @@ void abastecer_loja(int loja_id){
   pthread_cond_signal(&estoque_cond[loja_id]);
 }
 
+int checar_fila(int id){
+  if(!sem_trywait(&checar_filas[id])){
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 void comprar(int id){
   sem_post(&filas[id]);
   sem_wait(&atendimento[id]);
+  sem_post(&checar_filas[id]);
 }
 
 int total_lojas(){

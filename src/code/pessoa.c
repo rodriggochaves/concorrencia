@@ -18,6 +18,7 @@ int avancar_pessoa(celula* ps,celula* loja){
   
   // Se flag diferente de 0 houve uma movimentação
   int flag = 0;
+
   celula* aux = malloc(sizeof(celula));
   aux->linha = ps->linha;
   aux->coluna = ps->coluna;
@@ -27,19 +28,35 @@ int avancar_pessoa(celula* ps,celula* loja){
     flag = mover(ps,aux);
 
   } else {
-    if(ps->coluna == loja->coluna){
-      if(ps->linha < (loja->linha - 1)){
-        aux->linha = ps->linha + 1;
-      }
-      if( ps->linha > (loja->linha + 1)){
-        aux->linha = ps->linha - 1;
-      }
-      if( ps->linha == (loja->linha - 1) || ps->linha == (loja->linha + 1) ){
-        flag = 1;
-      } else {  
-        flag = mover(ps,aux);
-      }
+    if(ps->coluna == loja->coluna){        
+      flag = 1;
     } 
+  } 
+  if(!flag){
+    ps->linha = aux->linha;
+    ps->coluna = aux->coluna;
+    return flag;
+  } else {
+    return flag;
+  }
+}
+
+int move_vertical(celula* ps,celula* loja){
+  int flag = 0;
+  celula* aux = malloc(sizeof(celula));
+  aux->linha = ps->linha;
+  aux->coluna = ps->coluna;
+
+  if(ps->linha < (loja->linha - 1)){
+        aux->linha = ps->linha + 1;
+  }
+  if( ps->linha > (loja->linha + 1)){
+    aux->linha = ps->linha - 1;
+  }
+  if( ps->linha == (loja->linha - 1) || ps->linha == (loja->linha + 1) ){
+    flag = 1;
+  } else {  
+    flag = mover(ps,aux);
   }
 
   if(!flag){
@@ -116,33 +133,37 @@ void* cliente(void *arg){
   
   int total_loja = total_lojas();
   int dif,loja_id;
-  // Insere pessoa no mapa
-  inicia_pessoa(ps->cel);
+  while(1){
+    // Insere pessoa no mapa
+    inicia_pessoa(ps->cel);
 
-  saida = celula_saida_pessoa();
-  //substituir por vendedor
-  
-  // Define aleatoriamente a loja que a pessoa irá
-  loja_id = rand()%total_loja;
+    saida = celula_saida_pessoa();
+    //substituir por vendedor
+    
+    // Define aleatoriamente a loja que a pessoa irá
+    loja_id = rand()%total_loja;
 
-  // Descobre pelo id a posição da loja
-  loja = pos_loja(loja_id);
+    // Descobre pelo id a posição da loja
+    loja = pos_loja(loja_id);
 
-  while(!avancar_pessoa(ps->cel,loja)){
-    dif = ps->cel->linha - loja->linha;
-    if (dif > -2 && dif < 2){
-      comprar(loja_id);
+    while(!avancar_pessoa(ps->cel,loja)){
+      usleep(100000);
     }
-    usleep(100000);
-  }
-  
-  meia_volta(ps->cel); // realiza movimentação
-  usleep(100000);
-  while(!voltar_pessoa(ps->cel,saida)){
-    usleep(100000);
-  }
+    if(checar_fila(loja_id)){
+      while(!move_vertical(ps->cel,loja)){
+        usleep(100000);
+      }
+      comprar(loja_id);    
+      meia_volta(ps->cel); // realiza movimentação
+      usleep(100000);
+    }
+    while(!voltar_pessoa(ps->cel,saida)){
+      usleep(100000);
+    }
 
-  remover(ps->cel,'.');
+    remover(ps->cel,'.');
+    
+  }
 
   free(ps);
   pthread_exit(0);
