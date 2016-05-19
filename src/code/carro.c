@@ -8,6 +8,8 @@
 #include <stdio.h>
 
 pthread_t carros[CARROS];
+pthread_cond_t cond_carros[CARROS];
+pthread_mutex_t lock_carros[CARROS];
 
 int carro_direita(pos_carro*);
 
@@ -19,6 +21,12 @@ void* carro_thread(void* arg){
   car->pos->baixo_d = malloc(sizeof(celula));
   car->pos->baixo_e = malloc(sizeof(celula));
   
+  pthread_mutex_lock(&lock_carros[car->id]);
+  while(estoque_loja(car->loja_id) > 0){
+    pthread_cond_wait(&cond_carros[car->id],&lock_carros[car->id]);
+  }
+  pthread_mutex_unlock(&lock_carros[car->id]);
+
   // inicia carro na matriz
   inicia_carro(car->pos);
   // movimenta carro
@@ -32,6 +40,9 @@ void* carro_thread(void* arg){
   pthread_exit(0);
 }
 
+void chama_carro(int id){
+  pthread_cond_signal(&cond_carros[id]);
+}
 int carro_direita(pos_carro* pos){
 
   if(!mover_direita(pos->topo_d)){
