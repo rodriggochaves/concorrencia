@@ -125,11 +125,11 @@ void inicia_carro(pos_carro* pos){
   
   pos->topo_d->linha  = linha;
   pos->topo_d->coluna = coluna + 1;
-  shop[linha][coluna+1] = 'C';
+  shop[linha][coluna+1] = 'c';
 
   pos->baixo_d->linha  = linha + 1;
   pos->baixo_d->coluna = coluna + 1;
-  shop[linha+1][coluna+1] = 'C';
+  shop[linha+1][coluna+1] = 'c';
   
   pos->topo_e->linha  = linha;
   pos->topo_e->coluna = coluna;
@@ -205,6 +205,7 @@ int mover(celula* ini,celula* prox){
   }
 }
 
+// Atribui linha e coluna da celula ini a celula fim
 void atribui_celula(celula* ini,celula* fim){
   fim->linha = ini->linha;
   fim->coluna= ini->coluna;
@@ -213,10 +214,15 @@ void atribui_celula(celula* ini,celula* fim){
 int mover_direita(celula* cel){
   
   celula* aux = malloc(sizeof(celula));
-  
+  int res;
+
   atribui_celula(cel,aux);
   aux->coluna += 1;
-  return mover(cel,aux);
+  res = mover(cel,aux);
+  if(!res){
+    atribui_celula(aux,cel);
+  }
+  return res;
 }
 
 // retorna celula de saida das pessoas
@@ -234,7 +240,7 @@ celula* celula_saida_pessoa(){
 void imprime_shop(){
   int i,j,aux;
   char cel;
-  system("clear");
+  
   for (i = 0; i < LINHAS; ++i)   {
     for (j = 0; j < COLUNAS; ++j){
       cel = shop[i][j];
@@ -260,6 +266,12 @@ void imprime_shop(){
         case '#':
           printf(ANSI_COLOR_CYAN "%c" ANSI_COLOR_RESET, cel );
         break;
+        case 'c':
+          printf(ANSI_COLOR_RED "%c" ANSI_COLOR_RESET, cel );
+        break;
+        case 'C':
+          printf(ANSI_COLOR_RED "%c" ANSI_COLOR_RESET, cel );
+        break;
         default:
           printf("%c", cel );
       }
@@ -276,23 +288,3 @@ void imprime_shop(){
   fflush(stdout);
   usleep(50000);
 }
-
-/*
-========================================================
-c******************************************************|
-*******************************************************|
-========#==========#===========#=========#=======******|
-|....|..V.......|..V.........|.V......|..V......|******|
-|....|..........|............|........|.........|******|
-|....|___....___|____....____|__....__|___...___|******|
-p...............................................|******|
-................................................|******|
-................................................|******|
-|---...---|---...---|---...---|---...---|--...--|******|
-|.........|.........|.........|.........|.......|******|
-|....V....|....V....|....V....|....V....|...V...|******|
-=====#=========#=========#=========#========#====******|
-*******************************************************|
-*******************************************************|
-========================================================
-*/

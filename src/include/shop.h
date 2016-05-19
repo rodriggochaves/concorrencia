@@ -51,6 +51,12 @@ void inicia_carro(pos_carro*);
 
 void print_init(void);
 
+void atribui_celula(celula*,celula*);
+
+void debug(int);
+
+int mover_direita(celula*);
+
 celula* celula_char(char,int);
 
 celula* celula_saida_pessoa(void);
