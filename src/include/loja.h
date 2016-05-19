@@ -23,6 +23,8 @@ void comprar(int);
 
 int total_lojas(void);
 
+void abastecer_loja(int);
+
 int estoque_loja(int);
 
 celula* pos_loja(int);

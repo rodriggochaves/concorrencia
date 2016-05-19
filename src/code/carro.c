@@ -45,7 +45,8 @@ void* carro_thread(void* arg){
     // movimenta carro
     while(!carro_direita(car->pos)){
       if(verifica_entrega(car->pos->baixo_e,car->loja_id)){
-        sleep(5);
+        abastecer_loja(car->loja_id);
+        sleep(2);
       }
       usleep(50000);
     }
@@ -60,7 +61,8 @@ void* carro_thread(void* arg){
 
     while(!carro_esquerda(car->pos)){
       if(verifica_entrega(car->pos->topo_d,car->loja_id)){
-        sleep(5);
+        abastecer_loja(car->loja_id);
+        sleep(2);
       }
       usleep(50000);
     }
