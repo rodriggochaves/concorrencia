@@ -167,7 +167,8 @@ void remover(celula* cel,char c){
   pthread_mutex_unlock(&mlock[cel->linha][cel->coluna]);
 }
 
-// Move caractere da celula ini para celula prox, caso a movimentação seja valida
+// Move caractere da celula ini para celula prox
+// caso a movimentação seja valida retorna 0 e 1 caso contrário
 int mover(celula* ini,celula* prox){
   
   int linha,coluna;
@@ -200,9 +201,13 @@ int mover(celula* ini,celula* prox){
     return 0;
   
   } else {
-  
     return 1;
   }
+}
+
+void atribui_celula(celula* ini,celula* fim){
+  fim->linha = ini->linha;
+  fim->coluna= ini->coluna;
 }
 
 // retorna celula de saida das pessoas
