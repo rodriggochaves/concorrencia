@@ -210,6 +210,15 @@ void atribui_celula(celula* ini,celula* fim){
   fim->coluna= ini->coluna;
 }
 
+int mover_direita(celula* cel){
+  
+  celula* aux = malloc(sizeof(celula));
+  
+  atribui_celula(cel,aux);
+  aux->coluna += 1;
+  return mover(cel,aux);
+}
+
 // retorna celula de saida das pessoas
 celula* celula_saida_pessoa(){
 
