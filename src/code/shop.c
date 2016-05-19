@@ -308,7 +308,7 @@ void imprime_shop(){
           printf(ANSI_COLOR_RED "%c" ANSI_COLOR_RESET, cel );
         break;
         case 'C':
-          printf(ANSI_COLOR_RED "%c" ANSI_COLOR_RESET, cel );
+          printf(ANSI_COLOR_MAGENTA "%c" ANSI_COLOR_RESET, cel );
         break;
         default:
           printf("%c", cel );

@@ -23,6 +23,8 @@ int carro_esquerda(pos_carro*);
 
 void remove_carro(pos_carro*);
 
+int verifica_entrega(celula*,int);
+
 void* carro_thread(void* arg){
   carro* car = ((carro*) arg);
   car->pos = malloc(sizeof(pos_carro));
@@ -42,6 +44,9 @@ void* carro_thread(void* arg){
     inicia_carro(car->pos);
     // movimenta carro
     while(!carro_direita(car->pos)){
+      if(verifica_entrega(car->pos->baixo_e,car->loja_id)){
+        sleep(5);
+      }
       usleep(50000);
     }
 
@@ -54,6 +59,9 @@ void* carro_thread(void* arg){
     virar_carro_esquerda(car->pos);
 
     while(!carro_esquerda(car->pos)){
+      if(verifica_entrega(car->pos->topo_d,car->loja_id)){
+        sleep(5);
+      }
       usleep(50000);
     }
     // abastece a loja
@@ -61,6 +69,20 @@ void* carro_thread(void* arg){
     // vai embora
   }
   pthread_exit(0);
+}
+
+int verifica_entrega(celula* cel,int loja_id){
+  celula* lj = malloc(sizeof(celula));
+  int diff;
+  lj = pos_loja(loja_id);
+
+  if(cel->coluna == lj->coluna){
+    diff = lj->linha - cel->linha;
+    if(diff >= -2 && diff <= 2){
+      return 1;
+    }
+  }
+  return 0;
 }
 
 void virar_carro_baixo(pos_carro* pos){
