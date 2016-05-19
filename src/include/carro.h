@@ -19,7 +19,7 @@ typedef struct Carro{
   pos_carro* pos;
 }carro;
 
-void chama_carro(int);
+void chamar_carro(int);
 
 void criar_carro(int);
 

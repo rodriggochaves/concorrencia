@@ -240,7 +240,7 @@ celula* celula_saida_pessoa(){
 void imprime_shop(){
   int i,j,aux;
   char cel;
-  
+  system("clear");
   for (i = 0; i < LINHAS; ++i)   {
     for (j = 0; j < COLUNAS; ++j){
       cel = shop[i][j];

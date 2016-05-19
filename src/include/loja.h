@@ -3,7 +3,7 @@
 
 #define LOJAS 9
 #define LOJA_INIT_CHAR 'V'
-#define ESTOQUE_MAX 10
+#define ESTOQUE_MAX 1
 #define FILA_MAX 2
 
 struct celula;

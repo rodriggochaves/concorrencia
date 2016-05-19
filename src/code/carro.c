@@ -40,7 +40,7 @@ void* carro_thread(void* arg){
   pthread_exit(0);
 }
 
-void chama_carro(int id){
+void chamar_carro(int id){
   pthread_cond_signal(&cond_carros[id]);
 }
 int carro_direita(pos_carro* pos){

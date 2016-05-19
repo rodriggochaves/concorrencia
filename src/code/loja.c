@@ -1,5 +1,6 @@
 #include "../include/loja.h"
 #include "../include/shop.h"
+#include "../include/carro.h"
 
 #include <pthread.h>
 #include <stdlib.h>
@@ -17,7 +18,7 @@ int vender(int estoque,int id){
   pthread_mutex_lock(&lj_lock[id]);
   if(estoque == 0){
     // sinaliza caminhão
-
+    chamar_carro(id);
     // Espera abastecimento do caminhão
     pthread_cond_wait(&estoque_cond[id],&lj_lock[id]);
   }
