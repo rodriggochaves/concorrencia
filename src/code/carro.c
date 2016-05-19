@@ -13,6 +13,10 @@ pthread_mutex_t lock_carros[CARROS];
 
 int carro_direita(pos_carro*);
 
+int carro_baixo(pos_carro*);
+
+void virar_carro_baixo(pos_carro*);
+
 void* carro_thread(void* arg){
   carro* car = ((carro*) arg);
   car->pos = malloc(sizeof(pos_carro));
@@ -33,6 +37,12 @@ void* carro_thread(void* arg){
   while(!carro_direita(car->pos)){
     usleep(50000);
   }
+
+  virar_carro_baixo(car->pos);
+
+  while(!carro_baixo(car->pos)){
+    usleep(50000);
+  }
   // abastece a loja
 
   // vai embora
@@ -40,15 +50,32 @@ void* carro_thread(void* arg){
   pthread_exit(0);
 }
 
+void virar_carro_baixo(pos_carro* pos){
+  trocar_celula(pos->topo_d,pos->baixo_e);
+}
+
 void chamar_carro(int id){
   pthread_cond_signal(&cond_carros[id]);
 }
+
 int carro_direita(pos_carro* pos){
 
   if(!mover_direita(pos->topo_d)){
     mover_direita(pos->baixo_d);
     mover_direita(pos->topo_e);
     mover_direita(pos->baixo_e);
+    return 0;
+  } else {
+    return 1;
+  }
+}
+
+int carro_baixo(pos_carro* pos){
+
+  if(!mover_baixo(pos->baixo_d)){
+    mover_baixo(pos->baixo_e);
+    mover_baixo(pos->topo_d);
+    mover_baixo(pos->topo_e);
     return 0;
   } else {
     return 1;
