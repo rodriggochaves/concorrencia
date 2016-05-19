@@ -10,7 +10,7 @@
 
 
 #define LINHAS 17
-#define COLUNAS 57
+#define COLUNAS 55
 
 char shop[LINHAS][COLUNAS];
 int inicio_pessoa[2];
