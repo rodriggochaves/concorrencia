@@ -53,11 +53,11 @@ void print_init(void);
 
 void atribui_celula(celula*,celula*);
 
-void debug(int);
-
 int mover_direita(celula*);
 
 int mover_baixo(celula*);
+
+int mover_esquerda(celula*);
 
 void trocar_celula(celula*,celula*);
 

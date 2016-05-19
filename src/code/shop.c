@@ -77,7 +77,7 @@ void* print_thread(void* arg){
 //retorna 1 se a celula pode ser ocupada e 0 caso contrário
 int valido(int linha, int coluna){
   char c = shop[linha][coluna];
-  if (c != '-' && c != '|' && c != '=' && c != '_' && c != 'V'){
+  if (c != '-' && c != '|' && c != '=' && c != '_' && c != 'V' && c != '<' && c != '>'){
     return 1;
   } else {
     return 0;
@@ -242,6 +242,20 @@ int mover_baixo(celula* cel){
 
   atribui_celula(cel,aux);
   aux->linha += 1;
+  res = mover(cel,aux);
+  if(!res){
+    atribui_celula(aux,cel);
+  }
+  return res;
+}
+
+int mover_esquerda(celula* cel){
+  
+  celula* aux = malloc(sizeof(celula));
+  int res;
+
+  atribui_celula(cel,aux);
+  aux->coluna -= 1;
   res = mover(cel,aux);
   if(!res){
     atribui_celula(aux,cel);
