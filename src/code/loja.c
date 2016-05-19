@@ -17,6 +17,9 @@ loja* dados_lojas[LOJAS];
 void vender(int id){
   pthread_mutex_lock(&estoque_lock[id]);
   dados_lojas[id]->estoque -= 1;
+
+  // Finaliza atendimento
+  sem_post(&atendimento[id]);
   if(dados_lojas[id]->estoque == 0){
     // sinaliza caminhão
     chamar_carro(id);
@@ -33,7 +36,7 @@ void* loja_thread(void* arg){
   while(1){
     sem_wait(&filas[lj->id]);
     vender(lj->id);
-    sem_post(&atendimento[lj->id]);
+    
   }
   pthread_exit(0);
 }
