@@ -29,6 +29,5 @@ int main(void){
   for(i=0;i<PESSOAS;i++){
     destruir_pessoa(i);
   }
-  imprime_shop();
   return 0;  
 }

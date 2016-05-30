@@ -1,0 +1,30 @@
+#modulos
+
+##Mapa
+- Validação de movimentação
+- Controle de concorrência na matriz do mapa
+- acesso ao mapa
+- arquivos:
+    + mapa.c
+    + mapa.h
+    + mapa.txt
+
+##Pessoas
+- define movimentação de pessoas
+- Gerencia atributos de pessoas
+- Arquivos:
+    + pessoa.c
+    + pessoa.h
+  
+##Lojas
+- identifica e armazena todas as lojas disponiveis
+- gerencia estoque(numeração e concorrência)
+- Arquivos:
+    + lojas.c
+    + lojas.h
+
+##Carros 
+- Define movimentação dos carros
+- Abastece lojas
+- Arquivos:
+    
