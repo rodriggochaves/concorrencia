@@ -12,7 +12,7 @@ int main(void){
   int i;
   srand(time(NULL)); // Inicializando seed randomica
   
-  cria_shop();
+  cria_shop(); // Inicializa matriz do mapa
 
   for (i = 0; i < LOJAS; ++i){
     criar_loja(i);
