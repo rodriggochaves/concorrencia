@@ -12,12 +12,14 @@ SRC = src
 INC = include
 CODE = code
 FILES = files
+DOCS = docs
+BUILD = build
 
 INCLUDEDIR := $(SRC)/$(INC)
 SOURCEDIR := $(SRC)/$(CODE)
 FILESDIR := $(SRC)/$(FILES)
-BUILDDIR = build
-
+BUILDDIR := $(BUILD)
+DOCSDIR := $(DOCS)
 
 # Nome do executavel
 EXECUTABLE = shop
@@ -71,6 +73,9 @@ module:
 
 # Cria diretórios do projeto
 new:
+	@ echo "Criando diretório '$(DOCSDIR)'..."
+	@ mkdir -p $(DOCSDIR)
+
 	@ echo "Criando diretório '$(SRC)'..."
 	@ mkdir -p $(SRC)
 	
@@ -82,6 +87,9 @@ new:
 
 	@ echo "Criando diretório '$(FILESDIR)'..."
 	@ mkdir -p $(FILESDIR)
+
+	@ echo "Criando diretório '$(FILESDIR)'..."
+	@ mkdir -p $(DOCS)
 
 # Limpa diretório de compilação
 clean:
