@@ -1,30 +1,56 @@
 #modulos
 
+Uma breve descrição das atribuições dos modulos no projeto e os arquivos relacionados.
+
+##Main
+
+- Inicialização das entidades(threads)
+- Finalização do programa
+    + Condição de parada: Todas pessoas retiradas do mapa
+- Arquivos:
+    + main.c
+    + main.h
+
 ##Mapa
-- Validação de movimentação
+
+- Realiza as alterações no mapa(movimentações)
 - Controle de concorrência na matriz do mapa
-- acesso ao mapa
-- arquivos:
-    + mapa.c
-    + mapa.h
-    + mapa.txt
+- Acesso a dados do mapa
+- Inicializa e finaliza entidades no mapa
+- Imprime o mapa no terminal
+- Arquivos:
+    + shop.c
+    + shop.h
+    + shop.txt
 
 ##Pessoas
-- define movimentação de pessoas
-- Gerencia atributos de pessoas
+
+- Define movimentação e ações de pessoas
 - Arquivos:
     + pessoa.c
     + pessoa.h
   
 ##Lojas
-- identifica e armazena todas as lojas disponiveis
-- gerencia estoque(numeração e concorrência)
+
+- Identifica e armazena todas as lojas disponiveis
+- Controla o processo de compras efetuadas pelas pessoas
+    + Fila da loja
+    + Atendimento dos clientes
+    + Requisita abastecimento do estoque
+- Gerencia concorrentemente os atributos e o número total de lojas
+- Atributos:
+    + Identificador da loja
+    + Posição da loja
+    + Estoque
 - Arquivos:
-    + lojas.c
-    + lojas.h
+    + loja.c
+    + loja.h
 
 ##Carros 
+
 - Define movimentação dos carros
-- Abastece lojas
+- Abastece as lojas
 - Arquivos:
+    + carro.c
+    + carro.h
     
