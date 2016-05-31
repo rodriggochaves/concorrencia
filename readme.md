@@ -1,13 +1,13 @@
 #Centro comercial
 
-Autor: Vítor Passos Pontes
-Matrícula: 13/0137421
-Disciplina: 116297
-Turma: E
+Autor: Vítor Passos Pontes  
+Matrícula: 13/0137421  
+Disciplina: 116297  
+Turma: E  
 
 ##Introdução
 
-Esse projeto foi realizado como trabalho para a disciplina "Tópicos avançados em computadores" na turma de Programação concorrente.
+Esse projeto foi realizado como trabalho para a disciplina "Tópicos avançados em computadores" na turma de Programação concorrente.  
 O objetivo central do trabalho é criar uma simulação simplificada de um centro
 comercial utilizando as técnicas de controle de concorrência aprendidas.
 
