@@ -50,7 +50,7 @@ O controle de concorrência entre essas threads é feita utilizando semáforos, 
 
 - O "V" branco de vendedor representa a posição das lojas
 - O "P" amarelo representa as pessoas
-- Os carros são representados por 2 "C" para parte de trás e 2 "c" para parte dianteira
+- Os carros são representados por 2 "C"s para parte de trás e 2 "c"s para parte dianteira
 - Os "." verdes representam onde as pessoas podem se movimentar e o "*" as ruas para os carros
 - Os outros símbolos são apenas divisórias
 

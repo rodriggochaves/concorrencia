@@ -311,7 +311,11 @@ void imprime_shop(){
           printf(ANSI_COLOR_MAGENTA "%c" , cel );
         break;
         default:
-          printf(ANSI_COLOR_RESET "%c", cel );
+          if(cel >= '0' && cel <= '9'){
+            printf(ANSI_COLOR_CYAN "%c", cel );
+          } else {  
+            printf(ANSI_COLOR_RESET "%c", cel );
+          }
       }
     }
   }
