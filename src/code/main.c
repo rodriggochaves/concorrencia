@@ -29,5 +29,6 @@ int main(void){
   for(i=0;i<PESSOAS;i++){
     destruir_pessoa(i);
   }
+  imprime_shop();// Garante a impressão do mapa vazio
   return 0;  
 }
