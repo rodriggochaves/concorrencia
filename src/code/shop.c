@@ -284,41 +284,41 @@ void imprime_shop(){
       cel = shop[i][j];
       switch(cel){
         case '.':
-          printf(ANSI_COLOR_GREEN "%c" ANSI_COLOR_RESET, cel );
+          printf(ANSI_COLOR_GREEN "%c" , cel );
         break;
         case '=':
-          printf(ANSI_COLOR_BLUE "%c" ANSI_COLOR_RESET, cel );
+          printf(ANSI_COLOR_BLUE "%c" , cel );
         break;
         case '|':
-          printf(ANSI_COLOR_BLUE "%c" ANSI_COLOR_RESET, cel );
+          printf(ANSI_COLOR_BLUE "%c" , cel );
         break;
         case '-':
-          printf(ANSI_COLOR_BLUE "%c" ANSI_COLOR_RESET, cel );
+          printf(ANSI_COLOR_BLUE "%c" , cel );
         break;
         case '_':
-          printf(ANSI_COLOR_BLUE "%c" ANSI_COLOR_RESET, cel );
+          printf(ANSI_COLOR_BLUE "%c" , cel );
         break;
         case 'P':
-          printf(ANSI_COLOR_YELLOW "%c" ANSI_COLOR_RESET, cel );
+          printf(ANSI_COLOR_YELLOW "%c" , cel );
         break;
         case '#':
-          printf(ANSI_COLOR_CYAN "%c" ANSI_COLOR_RESET, cel );
+          printf(ANSI_COLOR_CYAN "%c" , cel );
         break;
         case 'c':
-          printf(ANSI_COLOR_RED "%c" ANSI_COLOR_RESET, cel );
+          printf(ANSI_COLOR_RED "%c" , cel );
         break;
         case 'C':
-          printf(ANSI_COLOR_MAGENTA "%c" ANSI_COLOR_RESET, cel );
+          printf(ANSI_COLOR_MAGENTA "%c" , cel );
         break;
         default:
-          printf("%c", cel );
+          printf(ANSI_COLOR_RESET "%c", cel );
       }
     }
   }
   printf("\n");
   for(i=0;i < LOJAS; i++){
     aux = estoque_loja(i);
-    printf("|id: %d estoque : %d|",i,aux);
+    printf("|"ANSI_COLOR_CYAN"#%d"ANSI_COLOR_RESET" estoque : %d|",i,aux);
     if(i%3 == 2)
       printf("\n");
   }
