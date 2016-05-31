@@ -8,7 +8,6 @@ typedef struct Celula celula;
 typedef struct Pessoa{
   int id;
   celula* cel;
-  float  dinheiro;
 }pessoa;
 
 void criar_pessoa(int);
