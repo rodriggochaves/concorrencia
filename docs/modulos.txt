@@ -32,7 +32,7 @@ Uma breve descrição das atribuições dos modulos no projeto e os arquivos rel
   
 ##Lojas
 
-- Identifica e armazena todas as lojas disponiveis
+- Identifica e armazena todas as lojas disponíveis
 - Controla o processo de compras efetuadas pelas pessoas
     + Fila da loja
     + Atendimento dos clientes
