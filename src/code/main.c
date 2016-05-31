@@ -15,7 +15,7 @@ int main(void){
   cria_shop(); // Inicializa matriz do mapa
 
   for (i = 0; i < LOJAS; ++i){
-    criar_loja(i);
+    criar_loja(i);m
   }
   print_init(); // inicializa impressão do mapa
   for (i=0;i< PESSOAS; ++i){
