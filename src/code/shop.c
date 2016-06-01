@@ -9,7 +9,7 @@
 #include <pthread.h>
 
 
-#define LINHAS 17
+#define LINHAS 19
 #define COLUNAS 55
 
 char shop[LINHAS][COLUNAS];

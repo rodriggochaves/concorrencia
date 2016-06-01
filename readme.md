@@ -9,7 +9,7 @@ Turma: E
 
 Esse projeto foi realizado como trabalho para a disciplina "Tópicos avançados em computadores" na turma de Programação concorrente na Universidade de Brasilia: UnB.  
 O objetivo central do trabalho é criar uma simulação simplificada de um centro
-comercial utilizando as técnicas de controle de concorrência aprendidas.
+comercial utilizando as técnicas de controle de concorrência aprendidas para solucionar os problemas de condição de corrida.
 
 ##Descrição
 
@@ -36,14 +36,14 @@ Os carros, quando requisitados, se dirigem a loja reabastecendo o estoque da loj
 O programa possui 4 tipos de threads: As lojas, pessoas, carros e a de impressão.
 O controle de concorrência entre essas threads é feita utilizando semáforos, locks e variáveis de condição. As situações que são utilizadas são:
 
-- Semáforos:
+- Semáforos
     + Capacidade das filas das lojas
     + Atendimento dos clientes
-- Locks:
+- Locks
     + Acesso aos estoques das lojas
     + Alteração do mapa 
     + Ocupação das celulas do mapa ex: Quando uma entidade ocupa uma celula ela possui o lock daquela célula.
-- Variáveis de condição:
+- Variáveis de condição
     + Controle do reabastecimento do estoque das lojas
 
 ##Representação
