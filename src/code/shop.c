@@ -18,6 +18,7 @@ int saida_pessoa[2];
 int inicio_carro[2];
 
 pthread_mutex_t mlock[LINHAS][COLUNAS];
+pthread_mutex_t print_lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_t printer;
 
 // Extrai mapa e dados do arquivo.
@@ -198,8 +199,8 @@ int mover(celula* ini,celula* prox){
     charprox = shop[nlinha][ncoluna];
     
     // Lembrar de apagar isso aqui
-    if(charini == '.'){
-      charini = '*';
+    if(charini == '.' || charini == '*'){
+      charini = 'B';
     }
     // Faz troca dos char das duas celulas
     shop[linha][coluna] = charprox;
