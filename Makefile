@@ -22,7 +22,7 @@ BUILDDIR := $(BUILD)
 DOCSDIR := $(DOCS)
 
 # Nome do executavel
-EXECUTABLE = shop
+EXECUTABLE = comercial
 
 # Dependências .h, Códigos fonte .c e objetos .o 
 DEPS = $(wildcard $(INCLUDEDIR)/*.h)
