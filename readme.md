@@ -83,8 +83,8 @@ O programa se encerra quando todas as pessoas tiverem deixado o centro comercial
 
 Para compilar o projeto é utilizado um makefile. Na pasta raiz do projeto onde se encontra o makefile utilize o comando `make` e `make run` para executá-lo.
 
-O modelo de comando utilizado para compilar o objeto dos módulos é:
-`gcc src/code/NomeModulo.c -Wall -Wstrict-prototypes  -c -o build/NomeModulo.o`
+O modelo de comando utilizado para compilar o objeto dos módulos é:  
+```gcc src/code/NomeModulo.c -Wall -Wstrict-prototypes  -c -o build/NomeModulo.o```
 
-O comando utilizado para compilar o executável é exatamente:
-`gcc -Wall -Wstrict-prototypes  -pthread -o build/comercial build/carro.o build/loja.o build/main.o build/pessoa.o build/shop.o`
+O comando utilizado para compilar o executável é exatamente:  
+```gcc -Wall -Wstrict-prototypes  -pthread -o build/comercial build/carro.o build/loja.o build/main.o build/pessoa.o build/shop.o```
