@@ -7,7 +7,7 @@ Turma: E
 
 ## Introdução
 
-Esse projeto foi realizado como trabalho para a disciplina "Tópicos avançados em computadores" na turma de Programação concorrente na Universidade de Brasilia: UnB.  
+Esse projeto foi realizado como trabalho para a disciplina "Tópicos avançados em computadores" na turma de Programação concorrente na Universidade de Brasilia: UnB no primeiro semestre de 2016.  
 O objetivo central do trabalho é criar uma simulação simplificada de um centro
 comercial utilizando as técnicas de controle de concorrência aprendidas para solucionar os problemas de condição de corrida.
 
@@ -29,10 +29,6 @@ As principais atividades realizadas pelo projeto são:
 - Controle da movimentação das entidades no mapa
 - Reabastecimento do estoque das lojas pelos carros
 
-O andamento do programa começa com as pessoas. A cada uma é designada uma loja aleatória, então a pessoa começa a se movimentar em direção a loja. Quando o cliente se aproxima da loja ele verifica se há espaço na fila, caso não haja ele vai embora. 
-Ao entrar na fila e chegar sua vez a pessoa é atendida, realiza sua compra e vai embora. No momento que o estoque da loja acaba ela para de vender e requisita um reabastecimento aos Carros.
-Os carros, quando requisitados, se dirigem a loja reabastecendo o estoque da loja a sua capacidade máxima.
-
 ## Concorrência
 
 O programa possui 4 tipos de threads: As lojas, pessoas, carros e a de impressão.
@@ -52,9 +48,9 @@ O controle de concorrência entre essas threads é feita utilizando semáforos, 
 
 O primeiro problema de concorrência abordado foi o controle do mapa. Para isso criou-se uma matriz de locks de mesmo tamanho da matriz do mapa. Quando uma thread pega um lock ela fica com esse lock até se movimentar para indicar que está ocupando aquela posição. Para movimentação as threads pegam o proximo lock, realizam a alteração do mapa e liberam o lock anterior.
 
-O proximo problema foi o controle das filas e atendimento das lojas. No caso da fila foi utilizado um semáforo. As pessoas tentam entrar na fila e caso não haja permissões o suficiente elas vão embora. Apôs entrar na fila e chegar a vez da pessoa ser atendida ela e o vendedor se comunicam através de semáforos. Essa parte do trabalho se assemelha ao problema do barbeiro exercitado em aula.
+O proximo problema foi o controle das filas e atendimento das lojas. No caso da fila foi utilizado um semáforo. As pessoas tentam entrar na fila e caso não haja permissões o suficiente elas vão embora. Apôs entrar na fila e chegar a vez da pessoa ser atendida ela informa o vendedor e espera ser avisada do término do atendimento para ir embora. Essa comunicação é feita através de semáforos assemelhando-se ao estudo dirigido do barbeiro.
 
-Por último foi feito o controle do estoque. O estoque possui um lock de acesso que é usado pelas lojas e carros para realizar alterações e pela thread de impressão para verificar o estoque das lojas antes de imprimir. Após toda venda o vendedor verifica o estoque e, caso não haja mais produtos, sinaliza o carro responsável, através de uma variável de condição. Por sua vez o carro se dirige a loja e enche o estoque, enquanto o vendedor para as vendas esperando o carro finalizar.
+Por último foi feito o controle do estoque. O estoque possui um lock de acesso que é usado pelas lojas e carros para realizar alterações e pela thread de impressão para verificar o estoque das lojas antes de imprimir. Após toda venda o vendedor verifica o estoque e, caso não haja mais produtos, sinaliza o carro responsável através de uma variável de condição. Por sua vez o carro se dirige a loja e enche o estoque, enquanto o vendedor interrompe as vendas esperando o carro finalizar.
 
 O programa se encerra quando todas as pessoas tiverem deixado o centro comercial.
 
@@ -85,4 +81,10 @@ O programa se encerra quando todas as pessoas tiverem deixado o centro comercial
 
 ## Compilando e executando
 
-Para compilar o projeto utilize o comando "make" e "make run" para executá-lo.
+Para compilar o projeto é utilizado um makefile. Na pasta raiz do projeto onde se encontra o makefile utilize o comando `make` e `make run` para executá-lo.
+
+O modelo de comando utilizado para compilar o objeto dos módulos é:
+`gcc src/code/NomeModulo.c -Wall -Wstrict-prototypes  -c -o build/NomeModulo.o`
+
+O comando utilizado para compilar o executável é exatamente:
+`gcc -Wall -Wstrict-prototypes  -pthread -o build/comercial build/carro.o build/loja.o build/main.o build/pessoa.o build/shop.o`
