@@ -40,18 +40,18 @@ dir:
 	@ mkdir -p $(BUILDDIR)
 
 $(BUILDDIR)/$(EXECUTABLE): $(OBJ)
-	@ $(CC) $(CFLAGS) $(LIBS) -o $@ $^
 	@ echo "Compilando executável"
+	@ $(CC) $(CFLAGS) $(LIBS) -o $@ $^
 
 $(BUILDDIR)/%.o : $(SOURCEDIR)/%.c $(DEPS)
-	@ $(CC) $< $(CFLAGS) -c -o $@
 	@ echo 'Compilando o arquivo: $(patsubst $(SOURCEDIR)/%.c,%.c,$<)'
+	@ $(CC) $< $(CFLAGS) -c -o $@
 
 # Compilação por objeto de acordo com o parâmetro "name"
 
 obj: $(SOURCEDIR)/$(name).c $(DEPS)
-	@ $(CC) $< -c -o $(BUILDDIR)/$(name).o
 	@ echo "Compilando o arquivo: $(name).c"
+	@ $(CC) $< -c -o $(BUILDDIR)/$(name).o
 
 # Executa programa
 run:
@@ -93,5 +93,5 @@ new:
 
 # Limpa diretório de compilação
 clean:
-	@ rm -rf $(BUILDDIR)/*
 	@ echo "Limpando diretório '$(BUILDDIR)' "
+	@ rm -rf $(BUILDDIR)/*
