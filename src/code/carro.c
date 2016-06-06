@@ -45,16 +45,13 @@ void* carro_thread(void* arg){
     // movimenta carro
     while(!carro_direita(car->pos)){
       if(verifica_entrega(car->pos->baixo_e,car->loja_id)){
-        sleep(2);
         abastecer_loja(car->loja_id);
       }
-      usleep(50000);
     }
 
     virar_carro_baixo(car->pos);
 
     while(!carro_baixo(car->pos)){
-      usleep(50000);
     }
 
     virar_carro_esquerda(car->pos);
@@ -62,9 +59,9 @@ void* carro_thread(void* arg){
     while(!carro_esquerda(car->pos)){
       if(verifica_entrega(car->pos->topo_d,car->loja_id)){
         abastecer_loja(car->loja_id);
-        sleep(2);
+
       }
-      usleep(50000);
+
     }
     // abastece a loja
     remove_carro(car->pos);

@@ -74,7 +74,6 @@ int meia_volta(celula* ps){
   celula* aux = malloc(sizeof(celula));
   aux->linha = ps->linha;
   aux->coluna = ps->coluna + 1;
-  sleep(1);
   if(mover(ps,aux)){
     
     return 1;
@@ -146,18 +145,17 @@ void* cliente(void *arg){
   loja = pos_loja(loja_id);
 
   while(!avancar_pessoa(ps->cel,loja)){
-    usleep(100000);
+
   }
   if(checar_fila(loja_id)){
     while(!move_vertical(ps->cel,loja)){
-      usleep(100000);
+
     }
     comprar(loja_id);    
     meia_volta(ps->cel); // realiza movimentação
-    usleep(100000);
   }
   while(!voltar_pessoa(ps->cel,saida)){
-    usleep(100000);
+  
   }
 
   remover(ps->cel,'.');
